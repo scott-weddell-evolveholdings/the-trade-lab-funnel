@@ -1,0 +1,78 @@
+/* ═══════════════════════════════════════
+   SLIDE 6 — WHO WE ARE
+═══════════════════════════════════════ */
+.slide--who {
+  background: var(--slide-scrim-navy);
+  display: flex; align-items: center; justify-content: center;
+  padding: 5rem clamp(1.5rem, 5vw, 4rem);
+}
+.who-inner {
+  display: grid; grid-template-columns: auto 1fr;
+  gap: clamp(2rem, 6vw, 5rem); align-items: center; max-width: 860px; width: 100%;
+}
+
+/* Logo column */
+.who-logo-col {
+  display: flex; flex-direction: column; align-items: center;
+  opacity: 0; transform: translateX(-16px);
+  transition: opacity 0.6s var(--ease-out), transform 0.6s var(--ease-out);
+}
+.who-logo-col.is-visible { opacity: 1; transform: none; }
+.who-logo-card {
+  background: white;
+  border-radius: 22px;
+  padding: 2rem 2.25rem;
+  box-shadow:
+    0 24px 64px rgba(0, 0, 0, 0.32),
+    0 4px 16px rgba(201, 162, 39, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  display: flex; align-items: center; justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.who-logo-card::after {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: var(--pm-gradient-primary);
+  border-radius: 22px 22px 0 0;
+}
+.who-logo-img {
+  width: 190px;
+  height: auto;
+  display: block;
+}
+
+/* Text column */
+.who-text {
+  opacity: 0; transform: translateY(12px);
+  transition: opacity 0.6s var(--ease-out) 0.15s, transform 0.6s var(--ease-out) 0.15s;
+}
+.who-text.is-visible { opacity: 1; transform: none; }
+.who-eyebrow {
+  font-family: var(--font-display); font-size: 0.72rem; font-weight: 700;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--pm-aqua); margin-bottom: 0.6rem;
+}
+.who-headline {
+  font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 1.9rem);
+  font-weight: 800; color: white; letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 0.9rem;
+}
+.who-body {
+  font-size: 0.9rem; color: rgba(255, 255, 255, 0.68); line-height: 1.75; margin-bottom: 1.25rem;
+}
+.who-cred {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 10px;
+  padding: 0.55rem 1rem; font-size: 0.8rem; font-weight: 500; color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 580px) {
+  .who-inner { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+  .who-cred { justify-content: center; }
+  .who-logo-img { width: 150px; }
+}

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Trades Lab — Cinematic Websites for Bathroom Businesses</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script type="module" src="/src/main.js"></script>
+</head>
+<body>
+
+<div class="water-bg" aria-hidden="true">
+  <video id="waterBgVideo" class="water-bg__video" muted loop playsinline preload="metadata"></video>
+</div>
+
+<%- include('src/partials/slide1-hook.html') %>
+
+<main class="funnel-scroll">
+
+  <%- include('src/partials/slide3-bookings.html') %>
+  <%- include('src/partials/slide4-features.html') %>
+  <%- include('src/partials/slide5-seo.html') %>
+  <%- include('src/partials/slide6-who.html') %>
+  <%- include('src/partials/slide7-proof.html') %>
+  <%- include('src/partials/slide8-close.html') %>
+</main>
+
+<%- include('src/partials/modal.html') %>
+
+<div id="template-bar" class="template-bar template-bar--hidden" aria-label="Get This Template">
+  <button class="template-bar__btn" onclick="openModal()">
+    Get This Template
+    <span class="template-bar__pill">Free</span>
+  </button>
+</div>
+
+</body>
+</html>

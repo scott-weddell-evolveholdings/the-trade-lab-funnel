@@ -1,0 +1,288 @@
+/* ═══════════════════════════════════════
+   RESET + THE TRADES LABS DESIGN SYSTEM
+   Navy / Brass / Cream (retheme of base tokens)
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  /* The Trades Lab — navy / brass / cream */
+  --pm-navy: #0E1B2A;
+  --pm-navy-light: #16314A;
+  --pm-blue: #C9A227;
+  --pm-aqua: #E0BE55;
+  --pm-white: #FFFFFF;
+  --pm-mist: #F7F4EF;
+  --pm-slate: #334155;
+  --pm-charcoal: #0F172A;
+  --pm-gold: #C9A227;
+
+  --pm-gradient-primary: linear-gradient(135deg, #C9A227 0%, #E0BE55 100%);
+  --pm-gradient-dark: linear-gradient(135deg, #0E1B2A 0%, #16314A 55%, #C9A227 140%);
+  --pm-shadow-primary: 0 12px 30px rgba(201, 162, 39, 0.28);
+  --pm-shadow-primary-md: 0 8px 28px rgba(201, 162, 39, 0.35);
+  --pm-shadow-primary-lg: 0 20px 50px rgba(14, 27, 42, 0.08);
+
+  --pm-blue-rgb: 201, 162, 39;
+  --pm-aqua-rgb: 224, 190, 85;
+  --pm-navy-rgb: 14, 27, 42;
+
+  /* Funnel aliases (existing partials / slide CSS) */
+  --bg: var(--pm-mist);
+  --blue-primary: var(--pm-blue);
+  --blue-dark: var(--pm-navy-light);
+  --blue-light: rgba(var(--pm-blue-rgb), 0.1);
+  --navy: var(--pm-navy);
+  --text-dark: var(--pm-charcoal);
+  --text-mid: var(--pm-slate);
+  --text-light: #64748b;
+  --font-display: 'Space Grotesk', sans-serif;
+  --font-body: 'Inter', sans-serif;
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Solid fills for non-hook slides; hook keeps semi-opaque to show water */
+  --slide-scrim-light: #F7F4EF;
+  --slide-scrim-navy: #0E1B2A;
+  --slide-scrim-who: #F7F4EF;
+  --hook-scrim-navy: rgba(14, 27, 42, 0.84);
+}
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--pm-slate);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow: hidden;
+}
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  letter-spacing: -0.03em;
+}
+
+/* Fixed ambient water (see main.js for src) */
+.water-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+.water-bg__video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: saturate(1.05) brightness(0.92);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+}
+.water-bg__video.is-playing { opacity: 1; }
+@media (prefers-reduced-motion: reduce) {
+  .water-bg { display: none; }
+}
+
+/* ═══════════════════════════════════════
+   SCROLL CONTAINER
+═══════════════════════════════════════ */
+.funnel-scroll {
+  position: relative;
+  z-index: 1;
+  height: 100vh;
+  overflow-y: scroll;
+  scroll-snap-type: y mandatory;
+  overscroll-behavior: contain;
+}
+#hook-layer:not([inert]) + .funnel-scroll {
+  visibility: hidden;
+}
+.slide {
+  scroll-snap-align: start;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* ═══════════════════════════════════════
+   SHARED NAV
+═══════════════════════════════════════ */
+.funnel-nav {
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: clamp(1.1rem, 3vh, 1.7rem) clamp(1.5rem, 5vw, 3.5rem);
+}
+.nav-brand {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: clamp(0.88rem, 1.7vw, 1.05rem);
+  color: white;
+  letter-spacing: -0.02em;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.nav-brand--light { color: var(--text-dark); }
+.nav-logo {
+  width: clamp(26px, 4.2vw, 36px);
+  height: clamp(26px, 4.2vw, 36px);
+  object-fit: contain;
+  flex-shrink: 0;
+  display: block;
+  border-radius: 9px;
+}
+.nav-badge {
+  font-family: var(--font-body);
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.6);
+  border: 1px solid rgba(255,255,255,0.18);
+  padding: 0.26rem 0.65rem;
+  border-radius: 999px;
+}
+.nav-badge--light {
+  color: var(--pm-blue);
+  border-color: rgba(var(--pm-aqua-rgb), 0.35);
+  background: rgba(var(--pm-aqua-rgb), 0.12);
+}
+@media (max-width: 480px) { .nav-badge { display: none; } }
+
+/* The Trades Lab brand TLD accent */
+.nav-brand-tld {
+  color: var(--pm-aqua);
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+/* Gradient text utility — used on hook headline key phrase */
+.hl-gradient {
+  background: linear-gradient(100deg, var(--pm-aqua) 0%, #a8f0ff 50%, var(--pm-blue) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  display: inline;
+}
+
+/* Shared scroll indicator */
+.scroll-indicator {
+  position: absolute;
+  bottom: clamp(1rem, 2.5vh, 1.8rem);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+}
+.scroll-label {
+  font-family: var(--font-body);
+  font-size: 0.52rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.28);
+}
+.scroll-chevrons { display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.scroll-chevron {
+  width: 8px; height: 8px;
+  border-right: 1.5px solid rgba(255,255,255,0.35);
+  border-bottom: 1.5px solid rgba(255,255,255,0.35);
+  opacity: 0;
+  animation: chevron-cascade 1.8s ease-in-out infinite;
+}
+.scroll-chevron:nth-child(1) { animation-delay: 0s; }
+.scroll-chevron:nth-child(2) { animation-delay: 0.2s; }
+.scroll-chevron:nth-child(3) { animation-delay: 0.4s; }
+@keyframes chevron-cascade {
+  0%   { opacity: 0;   transform: rotate(45deg) translateY(-4px); }
+  40%  { opacity: 0.7; transform: rotate(45deg) translateY(0); }
+  80%  { opacity: 0;   transform: rotate(45deg) translateY(4px); }
+  100% { opacity: 0;   transform: rotate(45deg) translateY(4px); }
+}
+
+/* ═══════════════════════════════════════
+   DESIGN SYSTEM UTILITIES (reference)
+═══════════════════════════════════════ */
+.pm-gradient-primary { background: var(--pm-gradient-primary); }
+.pm-gradient-dark { background: var(--pm-gradient-dark); }
+.pm-water-glow {
+  background: radial-gradient(circle at top right, rgba(var(--pm-aqua-rgb), 0.28), transparent 40%);
+}
+
+/* ═══════════════════════════════════════
+   STICKY TEMPLATE BAR
+═══════════════════════════════════════ */
+.template-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  z-index: 50;
+  display: flex;
+  justify-content: center;
+  padding: 0.75rem 1rem 0.9rem;
+  background: rgb(6 30 51 / 0%);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-top: 1px solid rgba(201, 162, 39, 0.18);
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.25);
+  transform: translateY(0);
+  transition: transform 0.38s var(--ease-out), opacity 0.38s ease;
+  will-change: transform;
+}
+.template-bar--hidden {
+  transform: translateY(110%);
+  opacity: 0;
+  pointer-events: none;
+}
+.template-bar__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: var(--pm-gradient-primary);
+  color: var(--pm-navy);
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(0.88rem, 2vw, 1rem);
+  letter-spacing: -0.02em;
+  border: none;
+  border-radius: 999px;
+  padding: 0.7rem 1.75rem;
+  cursor: pointer;
+  box-shadow: var(--pm-shadow-primary);
+  transition: transform 0.18s ease, box-shadow 0.18s ease;
+  white-space: nowrap;
+}
+.template-bar__btn:hover {
+  transform: translateY(-1px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(201, 162, 39, 0.42);
+}
+.template-bar__btn:active {
+  transform: translateY(0) scale(0.98);
+}
+.template-bar__pill {
+  background: rgba(14, 27, 42, 0.16);
+  font-family: var(--font-body);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.18rem 0.55rem;
+  border-radius: 999px;
+  border: 1px solid rgba(14, 27, 42, 0.25);
+}
+
+/* ═══════════════════════════════════════
+   KEYFRAMES
+═══════════════════════════════════════ */
+@keyframes dot-pulse {
+  0%   { transform: scale(1);   opacity: 0.85; }
+  100% { transform: scale(2.4); opacity: 0; }
+}
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}

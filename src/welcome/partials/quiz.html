@@ -1,0 +1,137 @@
+<section class="wl-step wl-step--quiz" data-step="quiz" hidden>
+
+  <!-- Video Background -->
+  <video class="wl-quiz__video-bg" id="quizVideoBg" autoplay muted loop playsinline aria-hidden="true"></video>
+  <div class="wl-quiz__overlay" aria-hidden="true"></div>
+
+  <div class="wl-quiz__inner">
+
+    <div class="wl-quiz__progress" id="quizProgress">
+      <div class="wl-quiz__progress-track">
+        <div class="wl-quiz__progress-fill" id="quizProgressFill" style="width: 20%"></div>
+      </div>
+      <span class="wl-quiz__progress-label" id="quizProgressLabel">Question 1 of 5</span>
+    </div>
+
+    <!-- Q1: DIY Likelihood -->
+    <div class="wl-quiz__step" data-quiz-step="1">
+      <h2 class="wl-quiz__question">If we send you the template, how likely are you to actually get it set up?</h2>
+      <div class="wl-quiz__options" data-quiz-field="diy">
+        <button class="wl-quiz__option" data-value="very-likely">
+          <span class="wl-quiz__option-letter">A</span>
+          Very likely — I'm pretty tech savvy
+        </button>
+        <button class="wl-quiz__option" data-value="would-try">
+          <span class="wl-quiz__option-letter">B</span>
+          I'd try but I'd probably get stuck somewhere
+        </button>
+        <button class="wl-quiz__option" data-value="no-time">
+          <span class="wl-quiz__option-letter">C</span>
+          Probably not — I just don't have the time
+        </button>
+        <button class="wl-quiz__option" data-value="not-a-chance">
+          <span class="wl-quiz__option-letter">D</span>
+          Not a chance, I just want someone to handle it
+        </button>
+      </div>
+    </div>
+
+    <!-- Q2: How Long -->
+    <div class="wl-quiz__step" data-quiz-step="2" hidden>
+      <h2 class="wl-quiz__question">How long have you been putting off getting a world-class website built?</h2>
+      <div class="wl-quiz__options" data-quiz-field="delay">
+        <button class="wl-quiz__option" data-value="few-months">
+          <span class="wl-quiz__option-letter">A</span>
+          A few months
+        </button>
+        <button class="wl-quiz__option" data-value="over-a-year">
+          <span class="wl-quiz__option-letter">B</span>
+          Over a year — it keeps getting pushed back
+        </button>
+        <button class="wl-quiz__option" data-value="never-priority">
+          <span class="wl-quiz__option-letter">C</span>
+          Never really made it a priority
+        </button>
+        <button class="wl-quiz__option" data-value="just-starting">
+          <span class="wl-quiz__option-letter">D</span>
+          I'm just getting started and want to do it right
+        </button>
+      </div>
+    </div>
+
+    <!-- Q3: Google Visibility -->
+    <div class="wl-quiz__step" data-quiz-step="3" hidden>
+      <h2 class="wl-quiz__question">When someone searches "bathroom fitters near me" — where do you show up?</h2>
+      <div class="wl-quiz__options" data-quiz-field="google">
+        <button class="wl-quiz__option" data-value="page-one">
+          <span class="wl-quiz__option-letter">A</span>
+          I'm on the first page
+        </button>
+        <button class="wl-quiz__option" data-value="not-page-one">
+          <span class="wl-quiz__option-letter">B</span>
+          I'm on Google somewhere, just not page one
+        </button>
+        <button class="wl-quiz__option" data-value="have-listing">
+          <span class="wl-quiz__option-letter">C</span>
+          I have a listing but I've never really checked
+        </button>
+        <button class="wl-quiz__option" data-value="not-showing">
+          <span class="wl-quiz__option-letter">D</span>
+          I have no idea — or I'm not showing up at all
+        </button>
+      </div>
+    </div>
+
+    <!-- Q4: Typical Job Value -->
+    <div class="wl-quiz__step" data-quiz-step="4" hidden>
+      <h2 class="wl-quiz__question">What's a typical bathroom job worth to you?</h2>
+      <div class="wl-quiz__options" data-quiz-field="revenue">
+        <button class="wl-quiz__option" data-value="under-4k">
+          <span class="wl-quiz__option-letter">A</span>
+          Under £4k
+        </button>
+        <button class="wl-quiz__option" data-value="4-8k">
+          <span class="wl-quiz__option-letter">B</span>
+          £4k – £8k
+        </button>
+        <button class="wl-quiz__option" data-value="8-12k">
+          <span class="wl-quiz__option-letter">C</span>
+          £8k – £12k
+        </button>
+        <button class="wl-quiz__option" data-value="12k-plus">
+          <span class="wl-quiz__option-letter">D</span>
+          £12k+
+        </button>
+      </div>
+    </div>
+
+    <!-- Q5: Desire / Close -->
+    <div class="wl-quiz__step" data-quiz-step="5" hidden>
+      <h2 class="wl-quiz__question">How many extra bathroom jobs a month would make a real difference?</h2>
+      <div class="wl-quiz__options" data-quiz-field="growth">
+        <button class="wl-quiz__option" data-value="1-2">
+          <span class="wl-quiz__option-letter">A</span>
+          1–2 would be solid
+        </button>
+        <button class="wl-quiz__option" data-value="3-4">
+          <span class="wl-quiz__option-letter">B</span>
+          3–4 and I could start thinking about taking someone on
+        </button>
+        <button class="wl-quiz__option" data-value="5-6">
+          <span class="wl-quiz__option-letter">C</span>
+          5–6 and I'd need a second team
+        </button>
+        <button class="wl-quiz__option" data-value="7-plus">
+          <span class="wl-quiz__option-letter">D</span>
+          7+ — I'm trying to grow this into something serious
+        </button>
+      </div>
+    </div>
+
+    <div class="wl-quiz__nav" id="quizNav">
+      <button class="wl-quiz__back" id="quizBack" hidden>← Back</button>
+    </div>
+
+  </div>
+
+</section>

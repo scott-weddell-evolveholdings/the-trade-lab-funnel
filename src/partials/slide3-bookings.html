@@ -1,0 +1,212 @@
+  <section class="slide slide--bookings" data-slide="bookings">
+
+    <%- include('nav.html') %>
+
+    <!-- Panel 1: Full Calendar -->
+    <div class="b-panel b-panel--calendar" data-hide-template-bar>
+      <div class="b-inner b-inner--cal">
+        <div class="b-cal-header">
+
+          <p class="b-cal-tagline">Your diary,<br>full of bathroom jobs.</p>
+        </div>
+        <div class="cal-card" id="calCard">
+          <div class="cal-header-bar">
+            <span class="cal-month">May 2026 &mdash; Week of May 4</span>
+            <span class="cal-status">Booked solid</span>
+          </div>
+          <div class="cal-days-row" aria-hidden="true">
+            <span class="cal-day-lbl"><span class="cal-day-name">Mon</span><span class="cal-day-num">4</span></span>
+            <span class="cal-day-lbl"><span class="cal-day-name">Tue</span><span class="cal-day-num">5</span></span>
+            <span class="cal-day-lbl"><span class="cal-day-name">Wed</span><span class="cal-day-num">6</span></span>
+            <span class="cal-day-lbl"><span class="cal-day-name">Thu</span><span class="cal-day-num">7</span></span>
+            <span class="cal-day-lbl"><span class="cal-day-name">Fri</span><span class="cal-day-num">8</span></span>
+          </div>
+          <div class="cal-body" id="calBody" aria-label="Full week of bathroom fitting jobs">
+            <div class="cal-col">
+              <div class="cal-job j-blue" data-ms="80">
+                <span class="cal-time">8:00 AM</span>
+                <span class="cal-name">Thompson</span>
+                <span class="cal-svc">Full Refit</span>
+              </div>
+              <div class="cal-job j-teal" data-ms="290">
+                <span class="cal-time">10:30 AM</span>
+                <span class="cal-name">Kelly Res.</span>
+                <span class="cal-svc">Survey + Quote</span>
+              </div>
+              <div class="cal-job j-green" data-ms="490">
+                <span class="cal-time">1:30 PM</span>
+                <span class="cal-name">Patel</span>
+                <span class="cal-svc">Wet Room</span>
+              </div>
+              <div class="cal-job j-purple" data-ms="670">
+                <span class="cal-time">3:30 PM</span>
+                <span class="cal-name">O'Brien</span>
+                <span class="cal-svc">En-suite</span>
+              </div>
+            </div>
+            <div class="cal-col">
+              <div class="cal-job j-green" data-ms="130">
+                <span class="cal-time">8:30 AM</span>
+                <span class="cal-name">Marsden</span>
+                <span class="cal-svc">Wet Room</span>
+              </div>
+              <div class="cal-job j-blue" data-ms="330">
+                <span class="cal-time">11:00 AM</span>
+                <span class="cal-name">Grayson</span>
+                <span class="cal-svc">Full Refit</span>
+              </div>
+              <div class="cal-job j-teal" data-ms="520">
+                <span class="cal-time">2:00 PM</span>
+                <span class="cal-name">Fletcher</span>
+                <span class="cal-svc">Survey + Quote</span>
+              </div>
+              <div class="cal-job j-purple" data-ms="710">
+                <span class="cal-time">4:00 PM</span>
+                <span class="cal-name">Reynolds</span>
+                <span class="cal-svc">En-suite</span>
+              </div>
+            </div>
+            <div class="cal-col">
+              <div class="cal-job j-purple" data-ms="200">
+                <span class="cal-time">8:00 AM</span>
+                <span class="cal-name">Chadwick</span>
+                <span class="cal-svc">Full Refit</span>
+              </div>
+              <div class="cal-job j-blue" data-ms="390">
+                <span class="cal-time">10:00 AM</span>
+                <span class="cal-name">Holloway</span>
+                <span class="cal-svc">Wet Room</span>
+              </div>
+              <div class="cal-job j-teal" data-ms="560">
+                <span class="cal-time">12:30 PM</span>
+                <span class="cal-name">Khan</span>
+                <span class="cal-svc">En-suite</span>
+              </div>
+              <div class="cal-job j-green" data-ms="740">
+                <span class="cal-time">3:00 PM</span>
+                <span class="cal-name">Whitfield</span>
+                <span class="cal-svc">Handover</span>
+              </div>
+            </div>
+            <div class="cal-col">
+              <div class="cal-job j-blue" data-ms="280">
+                <span class="cal-time">8:00 AM</span>
+                <span class="cal-name">Johnson</span>
+                <span class="cal-svc">Wet Room</span>
+              </div>
+              <div class="cal-job j-green" data-ms="440">
+                <span class="cal-time">10:30 AM</span>
+                <span class="cal-name">Wilson</span>
+                <span class="cal-svc">Full Refit</span>
+              </div>
+              <div class="cal-job j-teal" data-ms="610">
+                <span class="cal-time">1:00 PM</span>
+                <span class="cal-name">Ashworth</span>
+                <span class="cal-svc">Survey + Quote</span>
+              </div>
+              <div class="cal-job j-purple" data-ms="780">
+                <span class="cal-time">4:30 PM</span>
+                <span class="cal-name">Lee</span>
+                <span class="cal-svc">En-suite</span>
+              </div>
+            </div>
+            <div class="cal-col">
+              <div class="cal-job j-teal" data-ms="350">
+                <span class="cal-time">9:00 AM</span>
+                <span class="cal-name">Harris</span>
+                <span class="cal-svc">Full Refit</span>
+              </div>
+              <div class="cal-job j-purple" data-ms="510">
+                <span class="cal-time">11:30 AM</span>
+                <span class="cal-name">Rivington</span>
+                <span class="cal-svc">Wet Room</span>
+              </div>
+              <div class="cal-job j-blue" data-ms="690">
+                <span class="cal-time">2:30 PM</span>
+                <span class="cal-name">Turner</span>
+                <span class="cal-svc">Survey + Quote</span>
+              </div>
+              <div class="cal-job j-green" data-ms="850">
+                <span class="cal-time">4:00 PM</span>
+                <span class="cal-name">Campbell</span>
+                <span class="cal-svc">Handover</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Panel 2: Enquiries -->
+    <div class="b-panel b-panel--bookings" data-hide-template-bar>
+      <div class="b-inner b-inner--stat">
+        <div class="b-panel-meta">
+          <span class="b-panel-index">02</span>
+          <span class="b-panel-tag">Enquiries per month</span>
+        </div>
+        <div class="b-counter-wrap">
+          <div class="b-counter-block b-counter-block--before">
+            <span class="b-counter-value">4</span>
+            <span class="b-counter-label">before</span>
+          </div>
+          <div class="b-counter-arrow" aria-hidden="true">
+            <svg width="48" height="16" viewBox="0 0 48 16" fill="none"><path d="M0 8h44M38 2l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="b-counter-block b-counter-block--after">
+            <span class="b-counter-value"><span id="counterJobs">4</span></span>
+            <span class="b-counter-label">now</span>
+          </div>
+        </div>
+        <p class="b-stat-copy b-stat-copy--wide">More of the right people asking you for a price.</p>
+      </div>
+    </div>
+
+    <!-- Panel 3: Conversion -->
+    <div class="b-panel b-panel--conv" data-hide-template-bar>
+      <div class="b-inner b-inner--stat">
+        <div class="b-panel-meta">
+          <span class="b-panel-index">03</span>
+          <span class="b-panel-tag">Conversion rate</span>
+        </div>
+        <div class="b-counter-wrap">
+          <div class="b-counter-block b-counter-block--before">
+            <span class="b-counter-value">1 in 80</span>
+            <span class="b-counter-label">most trade sites</span>
+          </div>
+          <div class="b-counter-arrow" aria-hidden="true">
+            <svg width="48" height="16" viewBox="0 0 48 16" fill="none"><path d="M0 8h44M38 2l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="b-counter-block b-counter-block--after">
+            <span class="b-counter-value">1 in <span id="counterConv">80</span></span>
+            <span class="b-counter-label">this site</span>
+          </div>
+        </div>
+        <p class="b-stat-copy b-stat-copy--wide">Most trade sites turn 1 in 80 visitors into an enquiry. A cinematic one turns 1 in 8.</p>
+      </div>
+    </div>
+
+    <!-- Panel 4: Extra jobs won -->
+    <div class="b-panel b-panel--revenue" data-hide-template-bar>
+      <div class="b-inner b-inner--stat">
+        <div class="b-panel-meta">
+          <span class="b-panel-index">04</span>
+          <span class="b-panel-tag">Extra jobs won / month</span>
+        </div>
+        <div class="b-counter-wrap">
+          <div class="b-counter-block b-counter-block--before">
+            <span class="b-counter-value">£0</span>
+            <span class="b-counter-label">before</span>
+          </div>
+          <div class="b-counter-arrow" aria-hidden="true">
+            <svg width="48" height="16" viewBox="0 0 48 16" fill="none"><path d="M0 8h44M38 2l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div class="b-counter-block b-counter-block--after b-counter-block--green">
+            <span class="b-counter-value">£<span id="counterRevenue">0</span></span>
+            <span class="b-counter-label">now</span>
+          </div>
+        </div>
+        <p class="b-stat-copy b-stat-copy--wide">Two extra bathrooms a month at £8k each — won straight from your site.</p>
+      </div>
+    </div>
+
+  </section>

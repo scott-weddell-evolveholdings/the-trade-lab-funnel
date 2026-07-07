@@ -1,0 +1,21 @@
+{
+  "name": "lead-gen-funnel",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "build:single": "npm run build:single:index && npm run build:single:welcome",
+    "build:single:index": "vite build --config vite.single.config.js && node scripts/bundle.js",
+    "build:single:welcome": "vite build --config vite.welcome.config.js && node scripts/bundle.js dist/.single-welcome/welcome.html dist/welcome.single.html",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.4.0",
+    "vite-plugin-html": "^3.2.2"
+  },
+  "dependencies": {
+    "animejs": "^4.3.6"
+  }
+}
