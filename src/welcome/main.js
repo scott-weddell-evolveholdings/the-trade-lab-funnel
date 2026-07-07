@@ -1,5 +1,4 @@
 import faviconUrl from '../assets/trades-lab-favicon.svg'
-import waterBgUrl from '../assets/water_background.mp4'
 import { initAutoPlay } from '../demos/after-site.js'
 import './styles/welcome.css'
 
@@ -246,10 +245,6 @@ function buildResultPage() {
     <p>The template we sent you is solid. But a template sitting in your inbox doesn't rank on Google. It doesn't have your name, your service area, your photos, or your story.</p>
     <p><strong>${growthLine} doesn't happen from a template — it happens from a cinematic site built to convert.</strong></p>
   `
-
-  // ── Wire video bg ──────────────────────────────────────
-  const resultVideoBg = document.getElementById('resultVideoBg')
-  if (resultVideoBg && !resultVideoBg.src) resultVideoBg.src = waterBgUrl
 }
 
 // ── Quiz enter animation ──────────────────────────────────
@@ -303,10 +298,6 @@ document.addEventListener('click', (e) => {
 
 // ── Start on hero ─────────────────────────────────────────
 showStep('hero')
-
-// ── Wire up quiz video background ─────────────────────────
-const quizVideoBg = document.getElementById('quizVideoBg')
-if (quizVideoBg) quizVideoBg.src = waterBgUrl
 
 // ── Dev nav (development only) ────────────────────────────
 if (import.meta.env.DEV) {

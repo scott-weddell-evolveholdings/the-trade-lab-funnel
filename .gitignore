@@ -5,3 +5,6 @@ dist_old/
 *.timestamp-*.mjs
 .DS_Store
 .env
+
+# Local reference copy of the original funnel (not part of this project)
+lead_gen_funnel/

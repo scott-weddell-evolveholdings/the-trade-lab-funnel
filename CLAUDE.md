@@ -38,7 +38,7 @@ this before with a `sed 's#/assets/#assets/#g'` pass). Prefer the normal `build`
 ## Structure
 - `src/` — the source: `main.js`, `slides/` (each funnel section), `partials/` (EJS-style
   HTML includes, e.g. `slide1-hook.html`), `styles/`, `demos/` (the after-site canvas scrub),
-  `assets/` (the bathroom timelapse `water_background.mp4`, `hero-poster`, logo).
+  `assets/` (logo, favicons).
 - `public/` — static assets incl. the hero `frames/`.
 - `scripts/bundle.js` — inlines for the single-file build.
 - `vite.config.js` (multi-page), `vite.single.config.js`, `vite.welcome.config.js`.
@@ -46,9 +46,10 @@ this before with a `sed 's#/assets/#assets/#g'` pass). Prefer the normal `build`
 ## Hero mechanics (don't break these)
 - The hook hero is **scroll-jacked** (`src/slides/slide1-hook.js`) — wheel/touch events advance
   hookState: headline → demo scrub → CTA, then hands off to normal scroll.
-- The bathroom **timelapse video** plays as the hero background (`water_background.mp4`), with
-  `hero-poster.jpg` as the instant fallback. Keep the poster — it guarantees the bathroom shows
-  even if the video is slow to load.
+- The hero background is a **pure-CSS abstract gradient mesh** (`.ambient-bg` in
+  `src/styles/base.css`) — navy base with brass/gold radial-gradient blobs, no video/image asset.
+  The same pattern is reused for the welcome quiz/result steps (`.wl-quiz__ambient-bg`,
+  `.wl-result__ambient-bg` in `src/welcome/styles/welcome.css`).
 - EJS partials (`src/partials/`) do NOT hot-reload — restart `npm run dev` after editing them.
 
 ## ⚠️ Known issue — copy is out of date (first task)

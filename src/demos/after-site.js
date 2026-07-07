@@ -1,6 +1,6 @@
 /* ══════════════════════════════════════════════════════════
    AFTER-SITE SHARED COMPONENT
-   The Lumina Bathrooms website demo used in:
+   The Onyx & Oak website demo used in:
      - slide1-hook (embedded in browser chrome, scroll-driven)
      - demo.html?demo=hero (full-page iframe, auto-playing loop)
 
@@ -20,13 +20,13 @@ export const DEMO_HTML = `
     <nav class="as-nav">
       <a class="as-logo" href="#" tabindex="-1">
         <svg width="16" height="20" viewBox="0 0 22 28" fill="none" aria-hidden="true">
-          <path d="M11 0C11 0 0 10.5 0 17.5C0 23.299 4.925 28 11 28C17.075 28 22 23.299 22 17.5C22 10.5 11 0 11 0Z" fill="#F5B942"/>
+          <path d="M11 0C11 0 0 10.5 0 17.5C0 23.299 4.925 28 11 28C17.075 28 22 23.299 22 17.5C22 10.5 11 0 11 0Z" fill="#C9A227"/>
           <path d="M11 7C11 7 4 13.5 4 17.5C4 21.09 7.134 24 11 24C14.866 24 18 21.09 18 17.5C18 13.5 11 7 11 7Z" fill="#FAF7F2" opacity="0.45"/>
         </svg>
-        Lumina Bathrooms
+        Onyx &amp; Oak
       </a>
       <ul class="as-nav-links">
-        <li>Services</li><li>Gallery</li><li>About</li><li>Contact</li>
+        <li>Services</li><li>Process</li><li>Gallery</li><li>Reviews</li><li>Contact</li>
       </ul>
       <span class="as-nav-cta">Get a Free Quote</span>
     </nav>
@@ -51,7 +51,7 @@ export const DEMO_HTML = `
         </div>
       </div>
       <div class="as-hero-content" id="demoHeroContent">
-        <span class="as-label">Premium Bathroom Installation</span>
+        <span class="as-label">Luxury Bathroom Fitters · Manchester</span>
         <h2 class="as-headline">From Dated<br>to Immaculate.</h2>
         <p class="as-sub">We transform tired bathrooms into stunning spaces.<br>Showroom-quality results, every single time.</p>
         <span class="as-cta-btn">Get Your Free Quote &nbsp;&rarr;</span>

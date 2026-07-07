@@ -1,5 +1,3 @@
-import waterBgUrl from './assets/water_background.mp4'
-import heroPosterUrl from './assets/hero-poster.jpg'
 import markUrl from './assets/trades-lab-mark-cream.svg'
 import faviconUrl from './assets/trades-lab-favicon.svg'
 import appleUrl from './assets/apple-touch-180.png'
@@ -24,17 +22,6 @@ import { init as initSlide5 } from './slides/slide5-seo.js'
 import { init as initSlide6 } from './slides/slide6-who.js'
 import { init as initSlide7 } from './slides/slide7-proof.js'
 import { init as initSlide8 } from './slides/slide8-close.js'
-
-const waterVideo = document.getElementById('waterBgVideo')
-if (waterVideo) {
-  waterVideo.poster = heroPosterUrl
-  const wbWrap = document.querySelector('.water-bg')
-  if (wbWrap) { wbWrap.style.backgroundImage = `url(${heroPosterUrl})`; wbWrap.style.backgroundSize = 'cover'; wbWrap.style.backgroundPosition = 'center'; }
-  waterVideo.src = waterBgUrl
-  waterVideo.muted = true
-  waterVideo.addEventListener('playing', () => waterVideo.classList.add('is-playing'))
-  waterVideo.play().catch(() => {})
-}
 
 document.querySelectorAll('img.nav-logo').forEach((img) => {
   img.src = markUrl

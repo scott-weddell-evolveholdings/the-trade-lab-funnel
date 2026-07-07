@@ -21,13 +21,14 @@ const NAV = `
   <header class="d-nav" aria-label="Site navigation">
     <a href="#" class="d-nav-logo">
       ${LOGO_SVG}
-      <span class="d-nav-logo-text">Lumina Bathrooms</span>
+      <span class="d-nav-logo-text">Onyx &amp; Oak</span>
     </a>
     <nav aria-label="Primary">
       <ul class="d-nav-links">
         <li>Services</li>
+        <li>Process</li>
         <li>Gallery</li>
-        <li>Testimonials</li>
+        <li>Reviews</li>
         <li>Contact</li>
       </ul>
     </nav>
@@ -102,7 +103,7 @@ const reviewsPanel = `
       <article class="d-testi-card">
         <span class="d-testi-quote-mark" aria-hidden="true">"</span>
         <span class="d-testi-stars" aria-label="5 stars">★★★★★</span>
-        <p class="d-testi-text">Our old bathroom was tired and dated. I was almost embarrassed to have guests use it. Lumina turned it around in under two weeks — it looks brand new.</p>
+        <p class="d-testi-text">Our old bathroom was tired and dated. I was almost embarrassed to have guests use it. Onyx &amp; Oak turned it around in under two weeks — it looks brand new.</p>
         <span class="d-testi-author">Margaret L. — Stockport</span>
       </article>
     </div>
