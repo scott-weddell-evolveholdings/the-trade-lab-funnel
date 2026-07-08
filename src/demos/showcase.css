@@ -464,6 +464,152 @@ body {
   text-align: center;
 }
 
+/* ══ PROCESS / HOW IT WORKS ════════════════════════════════ */
+.d-process-sub {
+  text-align: center;
+  color: rgba(255,255,255,0.62);
+  font-size: 0.82rem;
+  max-width: 500px;
+  margin: -24px auto 34px;
+}
+.d-steps-grid {
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  gap: 14px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+.d-step {
+  flex: 1;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(201,168,76,0.35);
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.d-step:nth-child(3) { animation-delay: 0.1s; }
+.d-step:nth-child(5) { animation-delay: 0.2s; }
+.d-step-num {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+  margin-bottom: 14px;
+}
+.d-step h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--white);
+  margin-bottom: 9px;
+  line-height: 1.25;
+}
+.d-step p {
+  color: rgba(255,255,255,0.6);
+  font-size: 0.8rem;
+  line-height: 1.65;
+}
+.d-step-arrow {
+  align-self: center;
+  color: var(--gold);
+  font-size: 1.4rem;
+  opacity: 0.6;
+  flex: 0 0 auto;
+}
+
+/* ══ TEAM ══════════════════════════════════════════════════ */
+.d-team-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 940px;
+  margin: 0 auto;
+  width: 100%;
+}
+.d-team-card {
+  border: 1px solid var(--gold);
+  background: linear-gradient(160deg, #ffffff 0%, var(--cream) 100%);
+  padding: 30px 24px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 4px 24px rgba(201,168,76,0.07);
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.d-team-card:nth-child(2) { animation-delay: 0.1s; }
+.d-team-card:nth-child(3) { animation-delay: 0.2s; }
+.d-team-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Playfair Display', serif;
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--navy);
+  background: linear-gradient(150deg, #e7cf88 0%, var(--gold) 100%);
+  box-shadow: 0 6px 18px rgba(201,168,76,0.35);
+  margin-bottom: 16px;
+}
+.d-team-card h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.d-team-role {
+  font-size: 0.78rem;
+  color: var(--grey);
+  margin-bottom: 14px;
+}
+.d-team-badge {
+  font-size: 0.6rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid rgba(201,168,76,0.5);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+/* ══ STATS BAND (reviews) ══════════════════════════════════ */
+.d-stats-band {
+  display: flex;
+  justify-content: center;
+  gap: 34px;
+  flex-wrap: wrap;
+  margin: -14px auto 30px;
+}
+.d-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.d-stat strong {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--gold);
+  line-height: 1;
+}
+.d-stat span {
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
 /* ══ TESTIMONIALS ══════════════════════════════════════════ */
 .d-testi-label {
   font-size: 0.62rem;
@@ -877,7 +1023,11 @@ body {
   .d-two-col { grid-template-columns: 1fr; gap: 24px; }
   .d-cards-grid,
   .d-gallery-grid,
+  .d-team-grid,
   .d-testi-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
+  .d-steps-grid { flex-direction: column; max-width: 420px; }
+  .d-step-arrow { transform: rotate(90deg); }
+  .d-stats-band { gap: 20px; }
   .d-trust-item { padding: 0 12px; }
   .d-trust-divider { display: none; }
   .d-hero-headline { font-size: 2rem; }
