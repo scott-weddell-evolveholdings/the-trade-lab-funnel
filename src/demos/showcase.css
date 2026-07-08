@@ -485,63 +485,6 @@ body {
   text-align: center;
 }
 
-/* ══ PROCESS / HOW IT WORKS ════════════════════════════════ */
-.d-process-sub {
-  text-align: center;
-  color: rgba(255,255,255,0.62);
-  font-size: 0.82rem;
-  max-width: 500px;
-  margin: -24px auto 34px;
-}
-.d-steps-grid {
-  display: flex;
-  align-items: stretch;
-  justify-content: center;
-  gap: 14px;
-  max-width: 1000px;
-  margin: 0 auto;
-  width: 100%;
-}
-.d-step {
-  flex: 1;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(201,168,76,0.35);
-  padding: 26px 22px;
-  display: flex;
-  flex-direction: column;
-  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-.d-step:nth-child(3) { animation-delay: 0.1s; }
-.d-step:nth-child(5) { animation-delay: 0.2s; }
-.d-step-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  font-weight: 600;
-  color: var(--gold);
-  line-height: 1;
-  margin-bottom: 14px;
-}
-.d-step h3 {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--white);
-  margin-bottom: 9px;
-  line-height: 1.25;
-}
-.d-step p {
-  color: rgba(255,255,255,0.6);
-  font-size: 0.8rem;
-  line-height: 1.65;
-}
-.d-step-arrow {
-  align-self: center;
-  color: var(--gold);
-  font-size: 1.4rem;
-  opacity: 0.6;
-  flex: 0 0 auto;
-}
-
 /* ══ TEAM (real photos, caption overlay) ═══════════════════ */
 .d-team-grid {
   display: grid;
@@ -992,8 +935,6 @@ body {
   .d-team-grid,
   .d-review-grid,
   .d-quote-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
-  .d-steps-grid { flex-direction: column; max-width: 420px; }
-  .d-step-arrow { transform: rotate(90deg); }
   .d-stats-row { grid-template-columns: repeat(2, 1fr); }
   .d-statbox:nth-child(3) { border-left: none; }
   .d-trust-item { padding: 0 12px; }

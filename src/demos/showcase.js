@@ -66,32 +66,6 @@ const servicesPanel = `
     </div>
   </div>`
 
-const processPanel = `
-  <div class="d-section d-section--navy">
-    <p class="section-label">02 · How It Works</p>
-    <h2 class="section-headline" style="color:#fff">Your new bathroom in three simple steps</h2>
-    <p class="d-process-sub">No juggling trades, no stress — we handle the lot.</p>
-    <div class="d-steps-grid">
-      <article class="d-step">
-        <span class="d-step-num">01</span>
-        <h3>Get your free quote</h3>
-        <p>Tell us about your space. We visit, measure up, and give you a clear fixed price within 48 hours — no obligation.</p>
-      </article>
-      <span class="d-step-arrow" aria-hidden="true">→</span>
-      <article class="d-step">
-        <span class="d-step-num">02</span>
-        <h3>We design &amp; fit</h3>
-        <p>One vetted, insured team handles everything — design, supply, tiling, plumbing and electrics — start to finish.</p>
-      </article>
-      <span class="d-step-arrow" aria-hidden="true">→</span>
-      <article class="d-step">
-        <span class="d-step-num">03</span>
-        <h3>Enjoy your new bathroom</h3>
-        <p>Finished on schedule, left spotless, and backed by our 10-year workmanship guarantee. That's it.</p>
-      </article>
-    </div>
-  </div>`
-
 // Shared eyebrow: teal number + rule + label (matches the real site's 01..06 marks).
 const eyebrow = (num, label) =>
   `<p class="d-eyebrow"><span class="d-eyebrow-num">${num}</span><span class="d-eyebrow-line"></span>${label}</p>`
@@ -220,7 +194,6 @@ const quotePanel = `
 /* ══ RENDER ════════════════════════════════════════════════ */
 const panels = {
   services: servicesPanel,
-  process:  processPanel,
   gallery:  galleryPanel,
   team:     teamPanel,
   reviews:  reviewsPanel,
