@@ -444,10 +444,11 @@ document.addEventListener('click', (e) => {
 })
 
 // ── Checkout CTA → GHL order form / payment link ──────────
-// Set VITE_GHL_CHECKOUT_URL to your GHL Order Form (or Payment Link) URL. The
-// lead's details are prefilled so GHL ties the sale to the SAME contact created
-// at opt-in. Leave it blank and the Pay button just warns in the console.
-const CHECKOUT_URL = import.meta.env.VITE_GHL_CHECKOUT_URL || ''
+// This client's GHL checkout is the default below. Override per client with
+// VITE_GHL_CHECKOUT_URL (build-time). The lead's details are prefilled so GHL
+// ties the sale to the SAME contact created at opt-in.
+const DEFAULT_CHECKOUT_URL = 'https://lc.thedigitalmarketers.io/preview/IUvmBg2k26QuP4yh0YOo'
+const CHECKOUT_URL = import.meta.env.VITE_GHL_CHECKOUT_URL || DEFAULT_CHECKOUT_URL
 function wireCheckoutButton() {
   const btn = document.getElementById('buyCheckoutBtn')
   if (!btn) return
