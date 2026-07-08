@@ -7,9 +7,10 @@ for any client / GHL sub-account** — you only swap the `.env`.
 The GHL API key is **never** in the browser bundle. The frontend only calls our
 own backend routes; those routes (serverless functions) call GHL server-side.
 
-Deploys to **Vercel or Netlify** — both use the same shared logic
+Deploys to **Vercel, Netlify, or Railway** — all use the same shared logic
 (`services/handlers.js` + `services/ghl.js`); only the thin per-platform adapter
-differs (`api/ghl/*` for Vercel, `netlify/functions/*` for Netlify).
+differs (`api/ghl/*` for Vercel, `netlify/functions/*` for Netlify, `server.js`
+for Railway / any Node host).
 
 ---
 
@@ -35,6 +36,7 @@ quiz complete ───────POST /api/ghl/quiz──▶ services/ghl.js �
 | `services/handlers.js` | Shared route logic (`handleLead` / `handleQuiz` / `handleQuizStart`) used by both platforms. **Server-only.** |
 | `api/ghl/lead.js`, `quiz.js`, `quiz-start.js` | **Vercel** serverless functions (`req/res` adapters). |
 | `netlify/functions/ghl-*.js` | **Netlify** functions (`Request/Response` adapters). |
+| `server.js` | **Railway / Node** — Express server: serves `dist/` + the `/api/ghl/*` routes. |
 | `.env.example` | Every config value. Copy to `.env`. |
 | `netlify.toml` | Netlify build + functions config (Vercel auto-detects Vite + `api/`). |
 | `src/slides/modal.js` | Opt-in form → `/api/ghl/lead` + `/api/ghl/quiz-start`. |
@@ -210,6 +212,23 @@ Without a `.env`/CLI, the funnel still works end-to-end visually — the opt-in
 will just show the friendly error (no backend to answer `/api/ghl/lead`), which
 is expected until deployed or run under `netlify dev`.
 
+## Deploy (Railway)
+
+Railway runs a single Node service (`server.js`) that serves the built site **and**
+the `/api/ghl/*` routes.
+
+1. Railway → **New Project → Deploy from GitHub repo** → pick this repo. It reads
+   `railway.json`: build `npm run build`, start `node server.js`, healthcheck `/`.
+2. Add all `.env` values under **service → Variables** (see the list below). These
+   are available at **both build and runtime** on Railway, so `VITE_GHL_CHECKOUT_URL`
+   is baked into the frontend correctly.
+3. Under **Settings → Networking**, click **Generate Domain** (or add a custom one).
+4. Deploy. The site is live at that domain and the routes at `<domain>/api/ghl/lead`,
+   `/api/ghl/quiz`, `/api/ghl/quiz-start`.
+
+Local run of the production server: `npm run build && node --env-file=.env server.js`
+(Node 20+). Railway sets `PORT` automatically; the server listens on it.
+
 ## Deploy (Vercel)
 
 1. Import the repo in Vercel. It auto-detects **Vite** (build `npm run build`,
@@ -228,7 +247,7 @@ is expected until deployed or run under `netlify dev`.
 3. Deploy. The routes are live at `https://<site>/api/ghl/lead`, `/api/ghl/quiz`,
    `/api/ghl/quiz-start`.
 
-> Changing env vars on either platform requires a **redeploy** to take effect.
+> Changing env vars on any platform requires a **redeploy** to take effect.
 
 ---
 
