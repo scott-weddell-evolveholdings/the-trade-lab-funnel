@@ -14,7 +14,9 @@ Two pages:
 - **`welcome.html`** — the post-opt-in flow: welcome/pivot → engineered quiz → dynamic ROI
   result → the done-for-you offer.
 
-The opt-in POSTs the lead to a **GoHighLevel (GHL) webhook**.
+The opt-in and quiz POST to our own backend routes (`/api/ghl/lead`, `/api/ghl/quiz`)
+— Netlify Functions that push the lead into **GoHighLevel** server-side (the API key
+never touches the browser). See `GHL-INTEGRATION.md`, `services/ghl.js`, `netlify/functions/`.
 
 ## The business (why this exists)
 The Trades Lab sells **cinematic before/after "WOW" websites to UK trades** (plumbers,

@@ -1,9 +1,11 @@
-// ── Lead capture config ──────────────────────────────────────
-// Paste your GoHighLevel inbound webhook URL here before deploying.
-// Until then the form still works (shows success + goes to the welcome flow),
-// it just won't push the lead to your CRM.
-const GHL_WEBHOOK_URL = 'YOUR_GHL_WEBHOOK_URL'
+// ── Lead capture ─────────────────────────────────────────────────────────────
+// The opt-in POSTs to our own backend route /api/ghl/lead (a Netlify Function),
+// which talks to GoHighLevel server-side. The GHL API key is NEVER in this file
+// or anywhere in the browser bundle.
+const LEAD_ENDPOINT = '/api/ghl/lead'
 const WELCOME_URL = 'welcome.html'
+// Where we stash the lead so welcome.html's quiz can update the SAME contact.
+const LEAD_STORAGE_KEY = 'tl-lead'
 
 export function init() {
   /* ── Modal ── */
@@ -11,6 +13,10 @@ export function init() {
   const sheet     = document.getElementById('modalSheet');
   const formWrap  = document.getElementById('modalFormWrap');
   const success   = document.getElementById('modalSuccess');
+  const submitBtn = document.getElementById('modalSubmitBtn');
+  const errorEl   = document.getElementById('modalFormError');
+
+  let submitting = false;
 
   function openModal() {
     overlay.classList.add('is-open');
@@ -26,28 +32,68 @@ export function init() {
   function handleOverlayClick(e) {
     if (e.target === overlay) closeModal();
   }
-  function handleSubmit(e) {
+
+  function setLoading(on) {
+    submitting = on;
+    if (!submitBtn) return;
+    submitBtn.disabled = on;
+    submitBtn.classList.toggle('is-loading', on);
+  }
+  function showError(msg) {
+    if (!errorEl) return;
+    errorEl.textContent = msg;
+    errorEl.hidden = false;
+  }
+  function clearError() {
+    if (errorEl) errorEl.hidden = true;
+  }
+
+  async function handleSubmit(e) {
     e.preventDefault();
+    if (submitting) return;
+
     const name  = document.getElementById('f-name').value.trim();
     const email = document.getElementById('f-email').value.trim();
-    const city  = document.getElementById('f-city').value.trim();
-    if (!name || !email || !city) return;
-
-    // Send the lead to GoHighLevel (fire-and-forget). Swap the placeholder for
-    // your real GHL inbound webhook URL before going live.
-    if (GHL_WEBHOOK_URL && GHL_WEBHOOK_URL !== 'YOUR_GHL_WEBHOOK_URL') {
-      fetch(GHL_WEBHOOK_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, city, niche: 'plumbing', source: 'cinematic-funnel' }),
-      }).catch(() => {});
+    const town  = document.getElementById('f-city').value.trim(); // "Your Town" field
+    if (!name || !email || !town) {
+      showError('Please fill in your name, email and town.');
+      return;
     }
 
-    // Show success, then hand off to the welcome flow (quiz → ROI → DFY offer).
-    formWrap.classList.add('is-hidden');
-    success.classList.add('is-visible');
-    setTimeout(() => { window.location.href = WELCOME_URL; }, 1400);
+    clearError();
+    setLoading(true);
+
+    try {
+      const res = await fetch(LEAD_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, email, town }),
+      });
+      const data = await res.json().catch(() => ({}));
+
+      if (!res.ok || !data.success) {
+        throw new Error(data.error || 'Request failed');
+      }
+
+      // Persist the lead so the quiz (on welcome.html) can update the same GHL
+      // contact by email.
+      try {
+        localStorage.setItem(
+          LEAD_STORAGE_KEY,
+          JSON.stringify({ name, email, town, contactId: data.contactId || null })
+        );
+      } catch { /* storage may be unavailable — quiz will simply skip */ }
+
+      // Success → show confirmation, then continue to the quiz flow.
+      // (Quiz only starts AFTER a successful lead response.)
+      formWrap.classList.add('is-hidden');
+      success.classList.add('is-visible');
+      setTimeout(() => { window.location.href = WELCOME_URL; }, 1400);
+    } catch (err) {
+      console.error('[opt-in] lead submit failed:', err);
+      showError("Sorry — we couldn't save your details. Please check your connection and try again.");
+      setLoading(false);
+    }
   }
 
   window.openModal = openModal;

@@ -310,6 +310,29 @@
 .modal-submit:hover { filter: brightness(1.07); transform: translateY(-1px); box-shadow: 0 16px 36px rgba(var(--pm-blue-rgb),0.38); }
 .modal-submit:active { transform: translateY(0); }
 
+/* Loading state — swap arrow/label for a spinner, block re-submits */
+.modal-submit:disabled { cursor: not-allowed; filter: grayscale(0.15) brightness(0.98); transform: none; }
+.modal-submit .modal-submit-spinner { display: none; }
+.modal-submit.is-loading .modal-submit-label,
+.modal-submit.is-loading svg { display: none; }
+.modal-submit.is-loading .modal-submit-spinner {
+  display: inline-block; width: 16px; height: 16px; border-radius: 50%;
+  border: 2px solid rgba(14,27,42,0.35); border-top-color: var(--pm-navy);
+  animation: modal-spin 0.7s linear infinite;
+}
+@keyframes modal-spin { to { transform: rotate(360deg); } }
+
+/* Inline form error */
+.modal-form-error {
+  font-family: var(--font-body);
+  font-size: 0.74rem;
+  color: #d64545;
+  text-align: center;
+  margin-top: 0.7rem;
+  line-height: 1.4;
+}
+.modal-form-error[hidden] { display: none; }
+
 .modal-fine {
   font-family: var(--font-body);
   font-size: 0.66rem;

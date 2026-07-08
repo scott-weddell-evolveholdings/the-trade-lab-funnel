@@ -5,6 +5,11 @@ dist_old/
 *.timestamp-*.mjs
 .DS_Store
 .env
+.env.*
+!.env.example
+
+# Netlify local dev / build cache
+.netlify/
 
 # Local reference copy of the original funnel (not part of this project)
 lead_gen_funnel/

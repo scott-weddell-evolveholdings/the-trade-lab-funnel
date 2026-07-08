@@ -1,0 +1,15 @@
+# Netlify build + serverless config for the funnel.
+#
+# The Vite multi-page build outputs to dist/. The GHL API routes are Netlify
+# Functions in netlify/functions/ that self-register their own URLs via
+# `export const config = { path: '/api/ghl/...' }`.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+  functions = "netlify/functions"
+
+[functions]
+  # Bundle the shared services/ module in with each function.
+  node_bundler = "esbuild"
+  included_files = ["services/**"]

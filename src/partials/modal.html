@@ -70,11 +70,13 @@
           <label for="f-city">Your Town</label>
           <input type="text" id="f-city" placeholder="Manchester" autocomplete="address-level2" required>
         </div>
-        <button type="submit" class="modal-submit">
-          <span>Get My Free Template</span>
+        <button type="submit" class="modal-submit" id="modalSubmitBtn">
+          <span class="modal-submit-label">Get My Free Template</span>
+          <span class="modal-submit-spinner" aria-hidden="true"></span>
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
         </button>
       </form>
+      <p class="modal-form-error" id="modalFormError" role="alert" hidden></p>
       <p class="modal-fine">One spot per town &middot; No credit card &middot; We'll confirm within 24h</p>
     </div>
 

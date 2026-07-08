@@ -105,6 +105,139 @@ function setQuizStep(n) {
   backBtn.toggleAttribute('hidden', n <= 1)
 }
 
+// ── GHL quiz sync ─────────────────────────────────────────
+// Posts the completed quiz to our backend route /api/ghl/quiz, which updates the
+// SAME GoHighLevel contact (matched by email) server-side. No API key in the browser.
+const QUIZ_ENDPOINT = '/api/ghl/quiz'
+const LEAD_STORAGE_KEY = 'tl-lead' // written by the opt-in modal (src/slides/modal.js)
+
+// Human-readable labels — this is what actually gets saved to the CRM.
+const ANSWER_LABELS = {
+  diy: {
+    'very-likely': 'Very likely — tech savvy',
+    'would-try': 'Would try but might get stuck',
+    'no-time': 'Probably not — no time',
+    'not-a-chance': 'Wants it fully done-for-them',
+  },
+  delay: {
+    'few-months': 'Putting it off a few months',
+    'over-a-year': 'Putting it off over a year',
+    'never-priority': 'Never made it a priority',
+    'just-starting': 'Just getting started',
+  },
+  google: {
+    'page-one': 'On Google page one',
+    'not-page-one': 'On Google, not page one',
+    'have-listing': 'Has a listing, never checked',
+    'not-showing': 'Not showing up on Google',
+  },
+  revenue: {
+    'under-4k': 'Under £4k / job',
+    '4-8k': '£4k–£8k / job',
+    '8-12k': '£8k–£12k / job',
+    '12k-plus': '£12k+ / job',
+  },
+  growth: {
+    '1-2': '1–2 extra jobs/mo',
+    '3-4': '3–4 extra jobs/mo',
+    '5-6': '5–6 extra jobs/mo',
+    '7-plus': '7+ extra jobs/mo',
+  },
+}
+const QUESTION_TITLES = {
+  diy: 'Would set it up themselves',
+  revenue: 'Typical job value',
+  growth: 'Growth goal',
+  google: 'Google visibility',
+  delay: 'How long delayed',
+}
+const labelFor = (field, val) => ANSWER_LABELS[field]?.[val] || val || '—'
+
+// ⚠️ CHANGE ME per client: the service this funnel sells.
+const SERVICE_INTEREST = 'Cinematic Bathroom Website'
+
+/** Derive lead intent (High / Medium / Low) from the answers. Tweak the rules freely. */
+function deriveLeadIntent(a) {
+  const wantsDoneForThem = a.diy === 'no-time' || a.diy === 'not-a-chance'
+  const ambitious = a.growth === '5-6' || a.growth === '7-plus'
+  const highValue = a.revenue === '8-12k' || a.revenue === '12k-plus'
+  const selfSufficient = a.diy === 'very-likely' && a.google === 'page-one'
+
+  if (wantsDoneForThem && (ambitious || highValue)) return 'High'
+  if (selfSufficient) return 'Low'
+  if (wantsDoneForThem || ambitious || highValue) return 'High'
+  return 'Medium'
+}
+
+function getStoredLead() {
+  try { return JSON.parse(localStorage.getItem(LEAD_STORAGE_KEY) || '{}') } catch { return {} }
+}
+
+/** POST the completed quiz to the backend. Non-blocking: it never throws. */
+async function submitQuizToGHL() {
+  const lead = getStoredLead()
+  if (!lead.email) {
+    console.warn('[quiz] no stored lead email — skipping GHL sync')
+    return
+  }
+  const leadIntent = deriveLeadIntent(answers)
+  // Ordered so the three most sales-relevant answers land in QUIZ_RESPONSE_1..3.
+  const quizResponses = {
+    [QUESTION_TITLES.diy]: labelFor('diy', answers.diy),
+    [QUESTION_TITLES.revenue]: labelFor('revenue', answers.revenue),
+    [QUESTION_TITLES.growth]: labelFor('growth', answers.growth),
+    [QUESTION_TITLES.google]: labelFor('google', answers.google),
+    [QUESTION_TITLES.delay]: labelFor('delay', answers.delay),
+  }
+  const payload = {
+    email: lead.email,
+    name: lead.name || '',
+    town: lead.town || '',
+    quizResponses,
+    quizResult: `${leadIntent} Intent — ${SERVICE_INTEREST}`,
+    serviceInterest: SERVICE_INTEREST,
+    leadIntent,
+  }
+  try {
+    const res = await fetch(QUIZ_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    })
+    if (!res.ok) throw new Error(`quiz sync ${res.status}`)
+  } catch (err) {
+    // Non-blocking by design — the user still sees their result.
+    console.error('[quiz] GHL sync failed (continuing anyway):', err)
+  }
+}
+
+// Lightweight loading overlay while the result is prepared.
+function showQuizLoading(on) {
+  let el = document.getElementById('wl-quiz-loading')
+  if (on) {
+    if (!el) {
+      el = document.createElement('div')
+      el.id = 'wl-quiz-loading'
+      el.innerHTML = '<div class="wl-quiz-loading__spinner"></div><p>Analysing your answers…</p>'
+      document.body.appendChild(el)
+    }
+    requestAnimationFrame(() => el.classList.add('is-visible'))
+  } else if (el) {
+    el.classList.remove('is-visible')
+    setTimeout(() => el.remove(), 300)
+  }
+}
+
+/** Finish: show loading, sync to GHL (capped so a slow/failed CRM never blocks), reveal result. */
+async function finishQuiz() {
+  showQuizLoading(true)
+  const cap = new Promise((r) => setTimeout(r, 2500))
+  await Promise.race([submitQuizToGHL(), cap])
+  showQuizLoading(false)
+  buildResultPage()
+  showStep('result')
+}
+
 function handleOptionSelect(optionBtn) {
   const field = optionBtn.closest('[data-quiz-field]').dataset.quizField
   const value = optionBtn.dataset.value
@@ -121,8 +254,7 @@ function handleOptionSelect(optionBtn) {
     if (currentQuizStep < TOTAL_QUIZ_STEPS) {
       setQuizStep(currentQuizStep + 1)
     } else {
-      buildResultPage()
-      showStep('result')
+      finishQuiz()
     }
   }, 280)
 }

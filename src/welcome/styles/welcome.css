@@ -1352,3 +1352,37 @@ h1, h2, h3 {
   transition: opacity 0.18s;
 }
 .wl-buy__question a:hover { opacity: 0.75; }
+
+/* ═══════════════════════════════════════
+   QUIZ → RESULT LOADING OVERLAY
+═══════════════════════════════════════ */
+#wl-quiz-loading {
+  position: fixed;
+  inset: 0;
+  z-index: 9998;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.1rem;
+  background: rgba(var(--pm-navy-rgb), 0.94);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+#wl-quiz-loading.is-visible { opacity: 1; }
+.wl-quiz-loading__spinner {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 3px solid rgba(var(--pm-aqua-rgb), 0.25);
+  border-top-color: var(--pm-aqua);
+  animation: wl-quiz-spin 0.75s linear infinite;
+}
+@keyframes wl-quiz-spin { to { transform: rotate(360deg); } }
+@media (prefers-reduced-motion: reduce) {
+  .wl-quiz-loading__spinner { animation-duration: 1.6s; }
+}
