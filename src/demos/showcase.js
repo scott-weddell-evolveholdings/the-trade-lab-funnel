@@ -4,7 +4,7 @@ import './showcase.css'
 import { DEMO_HTML, initAutoPlay } from './after-site.js'
 
 /* ══════════════════════════════════════════════════════════
-   LUMINA BATHROOMS — DEMO SHOWCASE
+   ONYX & OAK — DEMO SHOWCASE
    The Trades Lab cinematic bathroom demo
    Cream / Navy / Brass — Playfair Display + Inter
 ══════════════════════════════════════════════════════════ */
@@ -80,6 +80,41 @@ const servicesPanel = `
         <p>Compact, beautifully finished en-suites that add real value to your home. Expert fitting by time-served tradespeople, finished to showroom standard.</p>
         <div class="d-card-price"><strong>From £3,500</strong><span>Get a Quote</span></div>
       </article>
+    </div>
+  </div>`
+
+/* before = the clean dated state (frame 0001, no demolition in shot);
+   after  = a fully finished frame (180+). Same room across cards — this is
+   an illustrative template showcase, not a real project archive. */
+const GALLERY_PROJECTS = [
+  { title: 'Family bathroom', loc: 'Didsbury',   tag: '5-day full refit',  before: '0001', after: '0193' },
+  { title: 'Master en-suite', loc: 'Altrincham', tag: 'walk-in wet room',  before: '0001', after: '0186' },
+  { title: 'Accessible bathroom', loc: 'Stockport', tag: '1-week install', before: '0001', after: '0180' },
+]
+
+const galleryPanel = `
+  <div class="d-section d-section--cream">
+    <p class="section-label">Our Work</p>
+    <h2 class="section-headline">Drag to reveal the transformation</h2>
+    <p class="d-gallery-sub">Real bathroom renovations across Manchester. Slide across to see tired bathrooms become showpieces.</p>
+    <div class="d-gallery-grid">
+      ${GALLERY_PROJECTS.map(p => `
+      <article class="d-gallery-card">
+        <div class="d-ba">
+          <img class="d-ba-img" src="frames/frame_${p.after}.jpg" alt="${p.title} in ${p.loc} — after renovation" loading="lazy">
+          <div class="d-ba-before"><img class="d-ba-img" src="frames/frame_${p.before}.jpg" alt="${p.title} in ${p.loc} — before renovation" loading="lazy"></div>
+          <span class="d-ba-label d-ba-label--before">Before</span>
+          <span class="d-ba-label d-ba-label--after">After</span>
+          <div class="d-ba-divider"><span class="d-ba-handle" aria-hidden="true">‹&nbsp;›</span></div>
+        </div>
+        <div class="d-gallery-cap">
+          <div class="d-gallery-meta">
+            <h3>${p.title}</h3>
+            <span class="d-gallery-loc">${p.loc}</span>
+          </div>
+          <span class="d-gallery-pill">${p.tag}</span>
+        </div>
+      </article>`).join('')}
     </div>
   </div>`
 
@@ -244,7 +279,7 @@ const paymentsPanel = `
 ══════════════════════════════════════════════════════════ */
 
 /* ══ RENDER ════════════════════════════════════════════════ */
-const panels = { services: servicesPanel, reviews: reviewsPanel, bookings: bookingsPanel, payments: paymentsPanel }
+const panels = { services: servicesPanel, gallery: galleryPanel, reviews: reviewsPanel, bookings: bookingsPanel, payments: paymentsPanel }
 
 const params = new URLSearchParams(window.location.search)
 const key = params.get('demo') || 'hero'

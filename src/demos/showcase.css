@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════
-   LUMINA BATHROOMS — DEMO SHOWCASE STYLES
+   ONYX & OAK — DEMO SHOWCASE STYLES
    The Trades Lab — cream / navy / brass
 ═══════════════════════════════════════════════════════════ */
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -343,6 +343,125 @@ body {
   border: 1px solid var(--gold);
   padding: 4px 10px;
   cursor: default;
+}
+
+/* ══ GALLERY / OUR WORK ════════════════════════════════════ */
+.d-gallery-sub {
+  text-align: center;
+  color: var(--grey);
+  font-size: 0.82rem;
+  max-width: 520px;
+  margin: -24px auto 30px;
+}
+.d-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1000px;
+  margin: 0 auto;
+  width: 100%;
+}
+.d-gallery-card {
+  border: 1px solid var(--gold);
+  background: linear-gradient(160deg, #ffffff 0%, var(--cream) 100%);
+  box-shadow: 0 4px 24px rgba(201,168,76,0.07);
+  overflow: hidden;
+  animation: fade-up 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.d-gallery-card:nth-child(2) { animation-delay: 0.1s; }
+.d-gallery-card:nth-child(3) { animation-delay: 0.2s; }
+
+/* Before / after split (static representation of the drag slider) */
+.d-ba {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--navy);
+}
+.d-ba-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.d-ba-before {
+  position: absolute;
+  inset: 0;
+  clip-path: inset(0 50% 0 0);
+}
+.d-ba-label {
+  position: absolute;
+  bottom: 10px;
+  z-index: 3;
+  font-size: 0.56rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: rgba(10,22,40,0.7);
+  backdrop-filter: blur(4px);
+  padding: 4px 9px;
+}
+.d-ba-label--before { left: 10px; }
+.d-ba-label--after  { right: 10px; }
+.d-ba-divider {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: var(--white);
+  box-shadow: 0 0 12px rgba(0,0,0,0.35);
+  z-index: 4;
+}
+.d-ba-handle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--white);
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.3);
+}
+.d-gallery-cap {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 16px 18px;
+}
+.d-gallery-meta h3 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--navy);
+  line-height: 1.2;
+}
+.d-gallery-loc {
+  font-size: 0.72rem;
+  color: var(--grey);
+}
+.d-gallery-pill {
+  flex: 0 0 auto;
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--gold);
+  border: 1px solid var(--gold);
+  padding: 4px 9px;
+  text-align: center;
 }
 
 /* ══ TESTIMONIALS ══════════════════════════════════════════ */
@@ -757,6 +876,7 @@ body {
   .d-nav-links { display: none; }
   .d-two-col { grid-template-columns: 1fr; gap: 24px; }
   .d-cards-grid,
+  .d-gallery-grid,
   .d-testi-grid { grid-template-columns: 1fr; max-width: 420px; margin: 0 auto; }
   .d-trust-item { padding: 0 12px; }
   .d-trust-divider { display: none; }
