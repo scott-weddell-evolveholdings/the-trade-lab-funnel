@@ -237,6 +237,18 @@ export async function addTags(contactId, tags = []) {
 }
 
 /**
+ * Convenience: add tags to a contact identified by email (looks it up first).
+ * Used by the "quiz started" ping. No-op if the contact isn't found yet.
+ */
+export async function addTagsByEmail(email, tags = []) {
+  if (!email) throw new Error('email is required')
+  const contact = await findContactByEmail(email)
+  if (!contact?.id) return { skipped: true, reason: 'contact not found' }
+  await addTags(contact.id, tags)
+  return { id: contact.id, tags: [...new Set((tags || []).filter(Boolean))] }
+}
+
+/**
  * 4) createOpportunity(contactId, data)
  * Only runs when BOTH GHL_PIPELINE_ID and GHL_STAGE_ID are configured — otherwise
  * it's skipped silently (returns { skipped: true }).

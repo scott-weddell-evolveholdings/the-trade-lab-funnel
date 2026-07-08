@@ -29,6 +29,7 @@ quiz complete ───────POST /api/ghl/quiz──▶ services/ghl.js �
 |------|------------|
 | `services/ghl.js` | Reusable, framework-agnostic GHL API client. **Server-only.** |
 | `netlify/functions/ghl-lead.js` | Serves `POST /api/ghl/lead` (opt-in). |
+| `netlify/functions/ghl-quiz-start.js` | Serves `POST /api/ghl/quiz-start` (quiz opened → "Quiz Started" tag). |
 | `netlify/functions/ghl-quiz.js` | Serves `POST /api/ghl/quiz` (quiz completion). |
 | `.env.example` | Every config value. Copy to `.env`. |
 | `netlify.toml` | Build + functions config. |
@@ -89,7 +90,7 @@ to skip opportunity creation entirely. Find them in GHL → *Settings → Pipeli
 ### 5. Tags (plain names — auto-created in GHL)
 ```
 GHL_TAG_OPTIN=Bathroom Template Lead     # added on opt-in
-GHL_TAG_QUIZ_STARTED=Quiz Started        # reserved (wire into a workflow if you want)
+GHL_TAG_QUIZ_STARTED=Quiz Started        # added when the quiz is opened (/api/ghl/quiz-start)
 GHL_TAG_QUIZ_COMPLETED=Quiz Completed    # added on quiz completion
 GHL_TAG_HIGH_INTENT=High Intent Lead     # added when leadIntent = "High"
 ```
@@ -129,6 +130,13 @@ The only funnel-specific copy in code is in `src/welcome/main.js`
 → validates, creates/updates the contact, adds the opt-in tag, saves the funnel
 source. Response: `{ "success": true, "contactId": "..." }`. The quiz only starts
 after a successful response.
+
+### `POST /api/ghl/quiz-start`
+```json
+{ "email": "mark@example.com" }
+```
+→ adds the `Quiz Started` tag to the contact (fire-and-forget when the quiz
+opens, so you can see quiz opens vs completions). Non-blocking.
 
 ### `POST /api/ghl/quiz`
 ```json

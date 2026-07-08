@@ -173,6 +173,20 @@ function getStoredLead() {
   try { return JSON.parse(localStorage.getItem(LEAD_STORAGE_KEY) || '{}') } catch { return {} }
 }
 
+// Fire-and-forget: tag the contact "Quiz Started" the moment the quiz opens.
+let quizStartedSent = false
+function markQuizStarted() {
+  if (quizStartedSent) return
+  const lead = getStoredLead()
+  if (!lead.email) return
+  quizStartedSent = true
+  fetch('/api/ghl/quiz-start', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ email: lead.email }),
+  }).catch((err) => console.warn('[quiz] quiz-start tag failed (ignored):', err))
+}
+
 /** POST the completed quiz to the backend. Non-blocking: it never throws. */
 async function submitQuizToGHL() {
   const lead = getStoredLead()
@@ -395,6 +409,7 @@ document.addEventListener('click', (e) => {
 
   if (action === 'start-quiz') {
     restoreAnswers()
+    markQuizStarted()
     showStep('quiz')
     setQuizStep(1)
     enterQuizSection()
