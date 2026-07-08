@@ -110,6 +110,38 @@ GHL_OPPORTUNITY_NAME_SUFFIX=Bathroom Funnel Lead     # opp title = "{name} - {su
 
 ---
 
+## Checkout (the buy-page CTA)
+
+The "Pay securely" button on `welcome.html` (`#buyCheckoutBtn`) hands off to a
+**GHL-hosted checkout** — GHL + Stripe handle the card/PCI side.
+
+**One-time GHL setup:**
+1. In GHL, connect Stripe (Payments → Integrations) if you haven't.
+2. Create the product and a checkout surface — either **Payments → Products** with
+   an order form, or a **Funnel** with an order-form step. Publish it and copy its
+   URL (e.g. `https://link.yourdomain.com/checkout` or a `*.gohighlevel.com` link).
+3. Set `VITE_GHL_CHECKOUT_URL` to that URL (in `.env` for local, and in the
+   Vercel/Netlify dashboard for production), then **redeploy** — Vite bakes
+   `VITE_` vars in at build time.
+
+**What the code does:** on the buy step it sets the button's `href` to your
+checkout URL with the lead's details prefilled (`email`, `name`, `full_name`,
+`first_name`, `last_name`), so GHL attaches the sale to the **same contact** from
+opt-in. Unrecognised params are ignored, so it's safe across GHL form types.
+
+**After payment (configure in GHL, no code):** add a workflow triggered by
+*Order Form Submitted / Payment Received* to tag the contact "Paid", move the
+opportunity to **Won**, send the receipt, and notify you.
+
+> `VITE_GHL_CHECKOUT_URL` is a public URL, not a secret — the `VITE_` prefix means
+> it's intentionally included in the browser bundle. Never give the checkout URL
+> the same treatment as `GHL_API_KEY`.
+
+> Prefer in-page checkout? GHL order forms also provide an iframe embed — drop it
+> into `buy.html` instead of linking out. Redirect is simpler and used here.
+
+---
+
 ## Reuse for another client (change only `.env`)
 
 1. Create the client's GHL sub-account custom fields, tags, and (optionally) a

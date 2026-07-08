@@ -443,6 +443,36 @@ document.addEventListener('click', (e) => {
   }
 })
 
+// ── Checkout CTA → GHL order form / payment link ──────────
+// Set VITE_GHL_CHECKOUT_URL to your GHL Order Form (or Payment Link) URL. The
+// lead's details are prefilled so GHL ties the sale to the SAME contact created
+// at opt-in. Leave it blank and the Pay button just warns in the console.
+const CHECKOUT_URL = import.meta.env.VITE_GHL_CHECKOUT_URL || ''
+function wireCheckoutButton() {
+  const btn = document.getElementById('buyCheckoutBtn')
+  if (!btn) return
+  if (!CHECKOUT_URL) {
+    console.warn('[checkout] VITE_GHL_CHECKOUT_URL not set — the Pay button has no destination yet.')
+    return
+  }
+  let url
+  try { url = new URL(CHECKOUT_URL) } catch { console.error('[checkout] VITE_GHL_CHECKOUT_URL is not a valid URL'); return }
+
+  // Prefill from the stored lead (GHL matches/creates the contact by email).
+  // Extra unknown params are ignored by GHL, so we send several field-name variants.
+  const lead = getStoredLead()
+  if (lead.email) url.searchParams.set('email', lead.email)
+  if (lead.name) {
+    url.searchParams.set('name', lead.name)
+    url.searchParams.set('full_name', lead.name)
+    const [first, ...rest] = lead.name.trim().split(/\s+/)
+    if (first) url.searchParams.set('first_name', first)
+    if (rest.length) url.searchParams.set('last_name', rest.join(' '))
+  }
+  btn.setAttribute('href', url.toString())
+}
+wireCheckoutButton()
+
 // ── Start on hero ─────────────────────────────────────────
 showStep('hero')
 
