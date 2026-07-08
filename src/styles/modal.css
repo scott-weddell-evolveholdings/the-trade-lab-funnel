@@ -373,10 +373,21 @@
   .modal-sheet {
     flex-direction: column;
     width: calc(100vw - 1.5rem);
-    max-height: calc(100vh - 1.5rem);
+    max-height: 92dvh;              /* dvh accounts for mobile browser chrome */
+    overflow-y: auto;              /* the whole sheet scrolls — nothing gets clipped */
+    -webkit-overflow-scrolling: touch;
   }
-  .modal-left { flex: none; padding: 1.5rem 1.4rem 1.2rem; }
-  .modal-lm-preview { display: none; }
-  .modal-right { padding: 1.5rem 1.4rem 1.8rem; }
+  /* Condense the lead-magnet header so the FORM is what's front-and-centre */
+  .modal-left { flex: none; padding: 1.3rem 1.4rem 1rem; }
+  .modal-lm-preview,
+  .modal-lm-sub,
+  .modal-lm-perks { display: none; }
+  .modal-lm-title { margin-bottom: 0.4rem; }
+  .modal-lm-value { margin-top: 0.2rem; }
+  .modal-right {
+    padding: 1.4rem 1.4rem 1.7rem;
+    justify-content: flex-start;   /* don't vertically-centre → no clipping */
+    overflow: visible;             /* let the sheet own the scroll */
+  }
   .modal-close { color: white; }
 }
