@@ -1,0 +1,285 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Trades Lab — Secure Checkout (design reference)</title>
+  <meta name="description" content="Standalone checkout page design for the The Trades Lab funnel — replicate in GHL.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+:root{
+  --navy:#0E1B2A; --navy-2:#16314A; --navy-3:#0B1622;
+  --gold:#C9A227; --gold-2:#E0BE55; --gold-soft:rgba(201,162,39,.28);
+  --cream:#F7F4EF; --paper:#FBFAF6; --white:#FFFFFF;
+  --ink:#0F172A; --slate:#334155; --slate-2:#5b6675;
+  --line:rgba(201,162,39,.22);
+  --on-navy:#EAF0F4; --on-navy-mute:#9DAAB6;
+  --grad:linear-gradient(135deg,#C9A227 0%,#E0BE55 100%);
+  --shadow-gold:0 14px 34px rgba(201,162,39,.30);
+  --disp:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
+  --body:'Inter',ui-sans-serif,system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+.co-root{
+  font-family:var(--body);
+  color:var(--on-navy);
+  background:
+    radial-gradient(ellipse 60% 45% at 12% 6%, rgba(224,190,85,.16) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 92%, rgba(201,162,39,.12) 0%, transparent 55%),
+    linear-gradient(160deg,var(--navy) 0%,#122236 55%,var(--navy) 100%);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  padding:clamp(1rem,3vw,2rem);
+  line-height:1.55;
+}
+.co-wrap{max-width:1120px;margin:0 auto}
+
+/* Top bar */
+.co-top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.4rem .2rem 1.6rem;
+}
+.co-brand{display:flex;align-items:center;gap:.6rem;font-family:var(--disp);font-weight:600;font-size:1.05rem;letter-spacing:-.01em;color:var(--cream)}
+.co-brand svg{flex:0 0 auto}
+.co-secure{display:flex;align-items:center;gap:.45rem;font-size:.66rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--on-navy-mute)}
+.co-secure svg{color:var(--gold-2)}
+
+/* Grid */
+.co-grid{
+  display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(1.6rem,3.5vw,3rem);
+  align-items:start;
+}
+.co-fade{opacity:0;transform:translateY(14px);animation:coUp .7s var(--ease) forwards}
+.co-fade.d2{animation-delay:.12s}
+
+/* ── Left: the offer ── */
+.co-eyebrow{font-family:var(--disp);font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2);margin-bottom:1rem}
+.co-h1{font-family:var(--disp);font-weight:700;font-size:clamp(1.9rem,3.6vw,2.85rem);line-height:1.06;letter-spacing:-.03em;color:#fff;text-wrap:balance;margin-bottom:1rem}
+.co-h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.co-sub{font-size:1rem;color:var(--on-navy-mute);max-width:46ch;margin-bottom:2rem}
+
+.co-block-label{font-family:var(--disp);font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--on-navy-mute);margin-bottom:.9rem}
+.co-list{list-style:none;display:flex;flex-direction:column;gap:.6rem;margin-bottom:2rem}
+.co-list li{display:flex;gap:.65rem;align-items:flex-start;font-size:.92rem;color:var(--on-navy)}
+.co-check{flex:0 0 auto;width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:rgba(201,162,39,.16);margin-top:.05rem}
+.co-check svg{color:var(--gold-2)}
+
+/* Guarantee callout */
+.co-guarantee{
+  display:flex;gap:.9rem;align-items:flex-start;
+  border:1px solid var(--line);border-left:3px solid var(--gold);
+  background:rgba(201,162,39,.06);border-radius:12px;
+  padding:1.1rem 1.25rem;margin-bottom:2rem;
+}
+.co-guarantee svg{flex:0 0 auto;color:var(--gold-2);margin-top:.1rem}
+.co-guarantee strong{font-family:var(--disp);color:#fff;font-weight:600;display:block;margin-bottom:.2rem;font-size:.98rem}
+.co-guarantee span{font-size:.85rem;color:var(--on-navy-mute)}
+
+/* Proof */
+.co-stats{display:grid;grid-template-columns:repeat(4,1fr);gap:.65rem;margin-bottom:1rem}
+.co-stat{border:1px solid rgba(255,255,255,.08);border-radius:10px;padding:.8rem .7rem;text-align:center;background:rgba(255,255,255,.02)}
+.co-stat b{display:block;font-family:var(--disp);font-weight:700;font-size:1.15rem;color:var(--gold-2);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+.co-stat span{font-size:.6rem;letter-spacing:.06em;text-transform:uppercase;color:var(--on-navy-mute)}
+.co-proof-line{font-size:.82rem;color:var(--on-navy-mute);max-width:48ch}
+.co-proof-line b{color:var(--cream);font-weight:600}
+
+/* ── Right: checkout card ── */
+.co-card{
+  background:var(--paper);color:var(--slate);
+  border-radius:18px;padding:clamp(1.4rem,2.5vw,2rem);
+  box-shadow:0 30px 70px rgba(0,0,0,.42),0 0 0 1px rgba(201,162,39,.14);
+  position:sticky;top:1.5rem;
+}
+.co-card-label{font-family:var(--disp);font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+
+.co-order{display:flex;gap:.9rem;align-items:flex-start;justify-content:space-between}
+.co-order-name{font-family:var(--disp);font-weight:600;font-size:1.02rem;color:var(--ink);line-height:1.25}
+.co-order-desc{font-size:.78rem;color:var(--slate-2);margin-top:.25rem;max-width:32ch}
+.co-order-price{font-family:var(--disp);font-weight:600;font-size:1.02rem;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+
+.co-rule{height:1px;background:var(--line);margin:1.1rem 0}
+.co-meta-row{display:flex;justify-content:space-between;font-size:.82rem;color:var(--slate-2)}
+.co-total{display:flex;align-items:baseline;justify-content:space-between;margin-top:.9rem}
+.co-total span{font-family:var(--disp);font-weight:600;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--slate)}
+.co-total b{font-family:var(--disp);font-weight:700;font-size:2rem;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+
+/* Fields (visual mockups — GHL supplies the live Stripe fields) */
+.co-fields{display:flex;flex-direction:column;gap:.7rem;margin:1.3rem 0}
+.co-field{display:flex;flex-direction:column;gap:.32rem}
+.co-field label{font-size:.68rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--slate-2)}
+.co-input{
+  border:1px solid #E4DECF;background:var(--white);border-radius:9px;
+  padding:.7rem .8rem;font-family:var(--body);font-size:.88rem;color:var(--ink);
+  display:flex;align-items:center;justify-content:space-between;gap:.5rem;min-height:44px;
+}
+.co-input.ph{color:#9aa2ad}
+.co-2col{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+.co-card-icons{display:flex;gap:4px}
+.co-card-icons i{width:26px;height:16px;border-radius:3px;display:inline-block;background:#e9e3d4}
+.co-card-icons i.v{background:linear-gradient(135deg,#1a1f71,#2b3aa0)}
+.co-card-icons i.m{background:linear-gradient(135deg,#eb001b,#f79e1b)}
+
+/* CTA */
+.co-cta{
+  width:100%;border:0;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:1.02rem;
+  color:var(--navy);background:var(--grad);border-radius:999px;padding:1rem 1.25rem;
+  display:flex;align-items:center;justify-content:center;gap:.55rem;
+  box-shadow:var(--shadow-gold);transition:transform .16s var(--ease),box-shadow .2s,filter .2s;letter-spacing:-.01em;
+}
+.co-cta:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 18px 42px rgba(201,162,39,.42)}
+.co-cta:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.co-cta .arw{transition:transform .2s var(--ease)}
+.co-cta:hover .arw{transform:translateX(4px)}
+
+.co-securestrip{display:flex;align-items:center;justify-content:center;gap:.45rem;margin-top:.9rem;font-size:.72rem;color:var(--slate-2)}
+.co-securestrip svg{color:var(--gold)}
+.co-fine{text-align:center;font-size:.7rem;color:#9aa2ad;margin-top:.55rem}
+
+/* Trust row */
+.co-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-top:2.4rem;border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.06)}
+.co-trust div{background:var(--navy-3);padding:1.1rem 1.2rem;text-align:center}
+.co-trust b{display:block;font-family:var(--disp);font-weight:600;font-size:.92rem;color:#fff;margin-bottom:.2rem}
+.co-trust span{font-size:.72rem;color:var(--on-navy-mute)}
+
+.co-foot{text-align:center;margin-top:2rem;font-size:.7rem;color:var(--on-navy-mute);line-height:1.7}
+.co-foot .ref{display:inline-block;margin-top:.4rem;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(201,162,39,.65)}
+
+@keyframes coUp{to{opacity:1;transform:none}}
+@media (max-width:880px){
+  .co-grid{grid-template-columns:1fr}
+  .co-card{position:static}
+  .co-stats{grid-template-columns:repeat(2,1fr)}
+  .co-trust{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  .co-fade{animation:none;opacity:1;transform:none}
+  .co-cta,.co-cta .arw{transition:none}
+}
+</style>
+
+<div class="co-root">
+  <div class="co-wrap">
+
+    <div class="co-top">
+      <div class="co-brand">
+        <svg width="20" height="26" viewBox="0 0 22 28" fill="none" aria-hidden="true">
+          <path d="M11 0C11 0 0 10.5 0 17.5C0 23.299 4.925 28 11 28C17.075 28 22 23.299 22 17.5C22 10.5 11 0 11 0Z" fill="#C9A227"/>
+          <path d="M11 7C11 7 4 13.5 4 17.5C4 21.09 7.134 24 11 24C14.866 24 18 21.09 18 17.5C18 13.5 11 7 11 7Z" fill="#F7F4EF" opacity=".45"/>
+        </svg>
+        The Trades Lab
+      </div>
+      <div class="co-secure">
+        <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true"><path d="M6 1 L11 3.5 V6.5 C11 9.5 8.5 12 6 13 C3.5 12 1 9.5 1 6.5 V3.5 L6 1Z" stroke="currentColor" stroke-width="1.2"/><path d="M4 7 L5.5 8.5 L8.5 5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        Secure Checkout
+      </div>
+    </div>
+
+    <div class="co-grid">
+
+      <!-- LEFT: the offer -->
+      <section class="co-offer co-fade">
+        <p class="co-eyebrow">Done-for-you · One-off · You own it</p>
+        <h1 class="co-h1">You're one step from a website that <em>wins the jobs.</em></h1>
+        <p class="co-sub">Complete your order and we'll start building your cinematic site. Live in 7 days — or you don't pay.</p>
+
+        <p class="co-block-label">What's included</p>
+        <ul class="co-list">
+          <li><span class="co-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Custom design &amp; branding around your trade and town</li>
+          <li><span class="co-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Professionally written copy for your business</li>
+          <li><span class="co-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Cinematic before/after reveal + transformation timelapse</li>
+          <li><span class="co-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Mobile-first, lightning-fast build</li>
+          <li><span class="co-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>Local SEO setup so you show up in your area</li>
+          <li><span class="co-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>1 year of hosting included</li>
+          <li><span class="co-check"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></span>30 days of post-launch support</li>
+        </ul>
+
+        <div class="co-guarantee">
+          <svg width="20" height="24" viewBox="0 0 22 26" fill="none" aria-hidden="true"><path d="M11 1 L20 5 V12 C20 18.5 16 23 11 25 C6 23 2 18.5 2 12 V5 L11 1Z" stroke="currentColor" stroke-width="1.4"/><path d="M7 12.5 L10 15.5 L15.5 9.5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div>
+            <strong>Live in 7 days, or your money back.</strong>
+            <span>If we don't deliver your finished site on time, you pay nothing. One payment, no contract — yours forever.</span>
+          </div>
+        </div>
+
+        <p class="co-block-label">Why The Trades Lab</p>
+        <div class="co-stats">
+          <div class="co-stat"><b>£3.5M+</b><span>Ad spend managed</span></div>
+          <div class="co-stat"><b>60,000+</b><span>Customers generated</span></div>
+          <div class="co-stat"><b>1,000+</b><span>Campaigns run</span></div>
+          <div class="co-stat"><b>10+ yrs</b><span>In the trenches</span></div>
+        </div>
+        <p class="co-proof-line"><b>We don't just build websites — we engineer revenue.</b> Agencies charge £5,000+ for this level of animation because they build from scratch. We've systemised it, and pass the saving on to you.</p>
+      </section>
+
+      <!-- RIGHT: checkout card -->
+      <section class="co-card co-fade d2" aria-label="Order and payment">
+        <p class="co-card-label">Order summary</p>
+
+        <div class="co-order">
+          <div>
+            <div class="co-order-name">Done-For-You Cinematic Website</div>
+            <div class="co-order-desc">Custom cinematic site — designed, written &amp; launched for you.</div>
+          </div>
+          <div class="co-order-price">£1,500</div>
+        </div>
+
+        <div class="co-rule"></div>
+        <div class="co-meta-row"><span>One-off payment</span><span>You own it outright</span></div>
+        <div class="co-total"><span>Total due today</span><b>£1,500</b></div>
+        <div class="co-rule"></div>
+
+        <div class="co-fields">
+          <div class="co-field">
+            <label>Full name</label>
+            <div class="co-input ph">Mark Thompson</div>
+          </div>
+          <div class="co-field">
+            <label>Email</label>
+            <div class="co-input ph">mark@onyxandoak.co.uk</div>
+          </div>
+          <div class="co-field">
+            <label>Phone</label>
+            <div class="co-input ph">07123 456789</div>
+          </div>
+          <div class="co-field">
+            <label>Card details</label>
+            <div class="co-input"><span>4242&nbsp; 4242&nbsp; 4242&nbsp; 4242</span><span class="co-card-icons"><i class="v"></i><i class="m"></i></span></div>
+          </div>
+          <div class="co-2col">
+            <div class="co-field"><label>Expiry</label><div class="co-input">09 / 28</div></div>
+            <div class="co-field"><label>CVC</label><div class="co-input">•••</div></div>
+          </div>
+        </div>
+
+        <button class="co-cta" type="button">Pay £1,500 &amp; Start My Build <span class="arw">→</span></button>
+
+        <div class="co-securestrip">
+          <svg width="12" height="14" viewBox="0 0 12 14" fill="none" aria-hidden="true"><path d="M6 1 L11 3.5 V6.5 C11 9.5 8.5 12 6 13 C3.5 12 1 9.5 1 6.5 V3.5 L6 1Z" stroke="currentColor" stroke-width="1.2"/><path d="M4 7 L5.5 8.5 L8.5 5.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Secured by Stripe · 256-bit SSL encryption
+        </div>
+        <p class="co-fine">One site per trade, per town.</p>
+      </section>
+
+    </div>
+
+    <div class="co-trust">
+      <div><b>100% Money-Back</b><span>Pay nothing if we're late</span></div>
+      <div><b>No Contract</b><span>One payment, yours forever</span></div>
+      <div><b>Live in 7 Days</b><span>Fast delivery, guaranteed</span></div>
+    </div>
+
+    <p class="co-foot">
+      © The Trades Lab · hello@thetradeslabs.co.uk
+      <br><span class="ref">Design reference — the card fields are mockups; rebuild in GHL with its live Stripe fields</span>
+    </p>
+
+  </div>
+</div>
+
+</body>
+</html>
