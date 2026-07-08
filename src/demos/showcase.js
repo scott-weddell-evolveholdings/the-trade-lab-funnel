@@ -9,20 +9,15 @@ import { DEMO_HTML, initAutoPlay } from './after-site.js'
    Cream / Navy / Brass — Playfair Display + Inter
 ══════════════════════════════════════════════════════════ */
 
-const LOGO_SVG = `
-  <svg width="18" height="23" viewBox="0 0 22 28" fill="none" aria-hidden="true">
-    <path d="M11 0C11 0 0 10.5 0 17.5C0 23.299 4.925 28 11 28C17.075 28 22 23.299 22 17.5C22 10.5 11 0 11 0Z" fill="#C9A84C"/>
-    <path d="M11 7C11 7 4 13.5 4 17.5C4 21.09 7.134 24 11 24C14.866 24 18 21.09 18 17.5C18 13.5 11 7 11 7Z" fill="#FAF7F2" opacity="0.45"/>
-  </svg>`
-
 /* DEMO_HTML for hero comes from ./after-site.js */
+
+// Shared header — identical across every tab (see .d-nav in showcase.css and the
+// matching .as-nav on the hero tab in slide1-hook.css).
+const PHONE_ICON = `<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>`
 
 const NAV = `
   <header class="d-nav" aria-label="Site navigation">
-    <a href="#" class="d-nav-logo">
-      ${LOGO_SVG}
-      <span class="d-nav-logo-text">Onyx &amp; Oak</span>
-    </a>
+    <a href="#" class="d-nav-logo"><span class="d-nav-logo-text">Onyx &amp; Oak<span class="d-nav-dot">.</span></span></a>
     <nav aria-label="Primary">
       <ul class="d-nav-links">
         <li>Services</li>
@@ -32,7 +27,10 @@ const NAV = `
         <li>Contact</li>
       </ul>
     </nav>
-    <span class="d-nav-cta">Get a Free Quote</span>
+    <div class="d-nav-right">
+      <span class="d-nav-phone">${PHONE_ICON} +44 7911071673</span>
+      <span class="d-nav-cta">Get a Free Quote</span>
+    </div>
   </header>`
 
 
@@ -94,23 +92,29 @@ const processPanel = `
     </div>
   </div>`
 
+// Shared eyebrow: teal number + rule + label (matches the real site's 01..06 marks).
+const eyebrow = (num, label) =>
+  `<p class="d-eyebrow"><span class="d-eyebrow-num">${num}</span><span class="d-eyebrow-line"></span>${label}</p>`
+
 const TEAM = [
-  { name: 'James W.', role: 'Founder & Design Director', initials: 'JW' },
-  { name: 'Laura B.', role: 'Senior Bathroom Designer',  initials: 'LB' },
-  { name: 'Tom A.',   role: 'Lead Installation Fitter',   initials: 'TA' },
+  { name: 'James W.', role: 'Founder & Design Director', img: 'james-w' },
+  { name: 'Laura B.', role: 'Senior Bathroom Designer',  img: 'laura-b' },
+  { name: 'Tom A.',   role: 'Lead Installation Fitter',   img: 'tom-a' },
 ]
 
 const teamPanel = `
-  <div class="d-section d-section--cream">
-    <p class="section-label">04 · The People Behind The Work</p>
+  <div class="d-section d-section--cream d-section--center">
+    ${eyebrow('04', 'The People Behind The Work')}
     <h2 class="section-headline">Great work comes from great teams</h2>
+    <p class="d-section-sub">Meet the designers and craftsmen who bring every Onyx &amp; Oak bathroom to life.</p>
     <div class="d-team-grid">
       ${TEAM.map(m => `
-      <article class="d-team-card">
-        <span class="d-team-avatar" aria-hidden="true">${m.initials}</span>
-        <h3>${m.name}</h3>
-        <span class="d-team-role">${m.role}</span>
-        <span class="d-team-badge">✓ Vetted &amp; insured</span>
+      <article class="d-team-frame">
+        <img src="team/${m.img}.jpg" alt="${m.name}, ${m.role}" loading="lazy">
+        <div class="d-team-caption">
+          <span class="d-team-name">${m.name}</span>
+          <span class="d-team-role">${m.role}</span>
+        </div>
       </article>`).join('')}
     </div>
   </div>`
@@ -150,35 +154,62 @@ const galleryPanel = `
     </div>
   </div>`
 
+const REVIEWS = [
+  { init: 'SC', name: 'Sarah C.', loc: 'Didsbury',   text: "They designed exactly the bathroom we'd struggled to picture, and finished a day early. Spotless work and not a penny over the quote." },
+  { init: 'MJ', name: 'Mark J.',  loc: 'Altrincham', text: "Turned a cramped, dated en-suite into a hotel-style wet room. One team start to finish — no chasing different trades. Faultless." },
+  { init: 'PD', name: 'Priya D.', loc: 'Stockport',  text: "We needed an accessible bathroom for mum that still looked beautiful — and that's exactly what we got. Kind, tidy, brilliant craftsmen." },
+]
+
 const reviewsPanel = `
-  <div class="d-section d-section--navy">
-    <p class="d-testi-label">05 · Loved By Homeowners</p>
-    <h2 class="d-testi-headline">What our clients say</h2>
-    <div class="d-stats-band">
-      <div class="d-stat"><strong>5.0</strong><span>Average rating</span></div>
-      <div class="d-stat"><strong>37</strong><span>Homeowner reviews</span></div>
-      <div class="d-stat"><strong>10 yr</strong><span>Workmanship guarantee</span></div>
-      <div class="d-stat"><strong>48 hr</strong><span>Fixed-price quote</span></div>
+  <div class="d-section d-section--mist d-section--center">
+    ${eyebrow('05', 'Loved By Homeowners')}
+    <h2 class="section-headline">What our clients say</h2>
+    <div class="d-stats-row">
+      <div class="d-statbox"><b>5.0</b><span>Average rating</span></div>
+      <div class="d-statbox"><b>37</b><span>Homeowner reviews</span></div>
+      <div class="d-statbox"><b>10</b><span>Year guarantee</span></div>
+      <div class="d-statbox"><b>48</b><span>Hour fixed quote</span></div>
     </div>
-    <div class="d-testi-grid">
-      <article class="d-testi-card">
-        <span class="d-testi-quote-mark" aria-hidden="true">"</span>
-        <span class="d-testi-stars" aria-label="5 stars">★★★★★</span>
-        <p class="d-testi-text">They designed exactly the bathroom we'd struggled to picture, and finished a day early. Spotless work and not a penny over the quote.</p>
-        <span class="d-testi-author">Sarah C. — Didsbury</span>
-      </article>
-      <article class="d-testi-card">
-        <span class="d-testi-quote-mark" aria-hidden="true">"</span>
-        <span class="d-testi-stars" aria-label="5 stars">★★★★★</span>
-        <p class="d-testi-text">Turned a cramped, dated en-suite into a hotel-style wet room. One team start to finish — no chasing different trades. Faultless.</p>
-        <span class="d-testi-author">Mark J. — Altrincham</span>
-      </article>
-      <article class="d-testi-card">
-        <span class="d-testi-quote-mark" aria-hidden="true">"</span>
-        <span class="d-testi-stars" aria-label="5 stars">★★★★★</span>
-        <p class="d-testi-text">We needed an accessible bathroom for mum that still looked beautiful — and that's exactly what we got. Kind, tidy, brilliant craftsmen.</p>
-        <span class="d-testi-author">Priya D. — Stockport</span>
-      </article>
+    <div class="d-review-grid">
+      ${REVIEWS.map(r => `
+      <article class="d-review-card">
+        <span class="d-review-quote" aria-hidden="true">&ldquo;</span>
+        <p class="d-review-text">${r.text}</p>
+        <div class="d-review-author">
+          <span class="d-review-avatar" aria-hidden="true">${r.init}</span>
+          <div class="d-review-meta">
+            <span class="d-review-name">${r.name}</span>
+            <span class="d-review-loc">${r.loc} · ★★★★★</span>
+          </div>
+        </div>
+      </article>`).join('')}
+    </div>
+  </div>`
+
+const quotePanel = `
+  <div class="d-section d-section--navy d-section--quote">
+    <div class="d-quote-grid">
+      <div class="d-quote-left">
+        <h2 class="d-quote-headline">Ready for a bathroom you'll <em>love coming home to?</em></h2>
+        <p class="d-quote-sub">Book a free, no-pressure quote. We'll measure up, talk through ideas, and give you a fixed price — no obligation.</p>
+        <ul class="d-quote-list">
+          <li><span aria-hidden="true">✓</span> Free home design consultation</li>
+          <li><span aria-hidden="true">✓</span> Fixed-price quote within 48 hours</li>
+          <li><span aria-hidden="true">✓</span> 10-year workmanship guarantee</li>
+        </ul>
+        <div class="d-quote-rule"></div>
+        <p class="d-quote-call">Call <span>+44 7911071673</span></p>
+      </div>
+      <div class="d-quote-card">
+        <h3>Get a free quote</h3>
+        <p class="d-quote-card-sub">We'll call you back within 24 hours.</p>
+        <div class="d-qfield">Your name</div>
+        <div class="d-qfield">Phone number</div>
+        <div class="d-qfield d-qfield--select">Full bathroom renovation<span aria-hidden="true">▾</span></div>
+        <p class="d-quote-rating"><span class="d-quote-stars">★★★★★</span> Rated 5.0 by 37 Manchester homeowners</p>
+        <button class="d-quote-btn" type="button">Get A Free Quote</button>
+        <p class="d-quote-fine">No obligation · No spam · We'll only call about your project.</p>
+      </div>
     </div>
   </div>`
 
@@ -193,6 +224,7 @@ const panels = {
   gallery:  galleryPanel,
   team:     teamPanel,
   reviews:  reviewsPanel,
+  quote:    quotePanel,
 }
 
 const params = new URLSearchParams(window.location.search)
