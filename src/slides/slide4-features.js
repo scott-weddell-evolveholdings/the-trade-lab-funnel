@@ -1,7 +1,6 @@
 export function init() {
   const featIframe = document.getElementById('featIframe');
   const featTabs   = document.getElementById('featTabs');
-  const featBrowserUrl = document.getElementById('featBrowserUrl');
 
   if (!featIframe || !featTabs) return;
 
@@ -11,9 +10,6 @@ export function init() {
       btn.classList.add('is-active');
 
       const demo = btn.dataset.demo;
-      if (featBrowserUrl && btn.dataset.url) {
-        featBrowserUrl.textContent = btn.dataset.url;
-      }
       if (demo && featIframe.src !== new URL(demo, window.location.href).href) {
         featIframe.classList.add('is-loading');
         featIframe.src = demo;
