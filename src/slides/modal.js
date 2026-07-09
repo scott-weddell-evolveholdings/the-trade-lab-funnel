@@ -2,6 +2,8 @@
 // The opt-in POSTs to our own backend route /api/ghl/lead (a Netlify Function),
 // which talks to GoHighLevel server-side. The GHL API key is NEVER in this file
 // or anywhere in the browser bundle.
+import { track } from '../lib/analytics.js';
+
 const LEAD_ENDPOINT = '/api/ghl/lead'
 const WELCOME_URL = 'welcome.html'
 // Where we stash the lead so welcome.html's quiz can update the SAME contact.
@@ -83,6 +85,11 @@ export function init() {
           JSON.stringify({ name, email, town, contactId: data.contactId || null })
         );
       } catch { /* storage may be unavailable — quiz will simply skip */ }
+
+      // Conversion event: fires the GTM Custom Event trigger for "generate_lead"
+      // (GA4 recommended event name; map to Meta's "Lead" standard event in GTM).
+      // No PII in the payload — GA4/Meta terms prohibit sending emails as event params.
+      track('generate_lead');
 
       // Success → show confirmation, then continue to the quiz flow.
       // (Quiz only starts AFTER a successful lead response.)

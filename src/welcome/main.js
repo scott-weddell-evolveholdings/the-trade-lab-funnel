@@ -1,5 +1,6 @@
 import faviconUrl from '../assets/trades-lab-favicon.svg'
 import { initAutoPlay } from '../demos/after-site.js'
+import { track } from '../lib/analytics.js'
 import './styles/welcome.css'
 
 // ── Favicon ───────────────────────────────────────────────
@@ -64,6 +65,7 @@ function showStep(id) {
       window.scrollTo({ top: 0, behavior: 'instant' })
       if (id === 'offer' && !offerDemoStarted) {
         offerDemoStarted = true
+        track('view_offer')
         requestAnimationFrame(initAutoPlay)
       }
     } else {
@@ -180,6 +182,7 @@ function markQuizStarted() {
   const lead = getStoredLead()
   if (!lead.email) return
   quizStartedSent = true
+  track('quiz_start')
   fetch('/api/ghl/quiz-start', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -244,6 +247,7 @@ function showQuizLoading(on) {
 
 /** Finish: show loading, sync to GHL (capped so a slow/failed CRM never blocks), reveal result. */
 async function finishQuiz() {
+  track('quiz_complete', { lead_intent: deriveLeadIntent(answers) })
   showQuizLoading(true)
   const cap = new Promise((r) => setTimeout(r, 2500))
   await Promise.race([submitQuizToGHL(), cap])
@@ -471,6 +475,12 @@ function wireCheckoutButton() {
     if (rest.length) url.searchParams.set('last_name', rest.join(' '))
   }
   btn.setAttribute('href', url.toString())
+
+  // Conversion event: fires just before the browser navigates to GHL checkout
+  // (GA4 "begin_checkout" / Meta "InitiateCheckout" — map in GTM).
+  btn.addEventListener('click', () => {
+    track('begin_checkout', { currency: 'GBP', value: 1500 })
+  })
 }
 wireCheckoutButton()
 
