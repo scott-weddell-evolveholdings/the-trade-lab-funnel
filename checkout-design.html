@@ -107,6 +107,7 @@
 .co-total{display:flex;align-items:baseline;justify-content:space-between;margin-top:.9rem}
 .co-total span{font-family:var(--disp);font-weight:600;font-size:.82rem;letter-spacing:.04em;text-transform:uppercase;color:var(--slate)}
 .co-total b{font-family:var(--disp);font-weight:700;font-size:2rem;color:var(--ink);font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.co-vat{font-size:.42em;font-weight:600;letter-spacing:.02em;color:var(--slate-2);vertical-align:.55em;margin-left:.15em}
 
 /* Fields (visual mockups — GHL supplies the live Stripe fields) */
 .co-fields{display:flex;flex-direction:column;gap:.7rem;margin:1.3rem 0}
@@ -225,12 +226,12 @@
             <div class="co-order-name">Done-For-You Cinematic Website</div>
             <div class="co-order-desc">Custom cinematic site — designed, written &amp; launched for you.</div>
           </div>
-          <div class="co-order-price">£1,500</div>
+          <div class="co-order-price">£1,500<span class="co-vat">+VAT</span></div>
         </div>
 
         <div class="co-rule"></div>
         <div class="co-meta-row"><span>One-off payment</span><span>You own it outright</span></div>
-        <div class="co-total"><span>Total due today</span><b>£1,500</b></div>
+        <div class="co-total"><span>Total due today</span><b>£1,500<span class="co-vat">+VAT</span></b></div>
         <div class="co-rule"></div>
 
         <div class="co-fields">
