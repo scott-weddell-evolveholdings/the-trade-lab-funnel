@@ -346,7 +346,8 @@
 @media (max-width: 640px) {
   .b-panel {
     align-items: flex-start;
-    overflow-y: auto;
+    overflow-y: visible;      /* let the page scroll own it — no nested scroll trap */
+    min-height: 100dvh;       /* fit the visible viewport, not the 100vh chrome area */
   }
   .b-counter-wrap { gap: 1rem; }
   .b-counter-value { font-size: clamp(3.2rem, 18vw, 5.5rem); }

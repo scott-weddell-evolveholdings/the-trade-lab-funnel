@@ -92,6 +92,16 @@ h1, h2, h3, h4 {
   position: relative;
 }
 
+/* Mobile: disable scroll-snap. Mandatory snap + `scroll-snap-stop: always` on the
+   100vh bookings panels traps touch scrolling (100vh > the visible area behind the
+   browser chrome), so the page feels frozen. Free-scroll instead — the reveal/
+   counter animations use IntersectionObserver, so they still fire. Snap-driven
+   panels also size to the *visible* viewport via dvh so nothing overshoots. */
+@media (max-width: 840px) {
+  .funnel-scroll { scroll-snap-type: none; height: 100dvh; }
+  .slide { min-height: 100dvh; }
+}
+
 /* ═══════════════════════════════════════
    SHARED NAV
 ═══════════════════════════════════════ */
