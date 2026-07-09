@@ -345,10 +345,16 @@
 /* ── Responsive ── */
 @media (max-width: 640px) {
   .b-panel {
-    align-items: flex-start;
     overflow-y: visible;      /* let the page scroll own it — no nested scroll trap */
     min-height: 100dvh;       /* fit the visible viewport, not the 100vh chrome area */
+    /* stat panels keep the base align-items: center → vertically centered */
   }
+  /* Only the tall calendar starts at the top so it isn't clipped. */
+  .b-panel--calendar { align-items: flex-start; }
+  /* Trim the stat panels' heavy top/bottom padding so content sits truly centred. */
+  .b-panel--bookings .b-inner,
+  .b-panel--conv .b-inner,
+  .b-panel--revenue .b-inner { padding-top: 2rem; padding-bottom: 2rem; }
   .b-counter-wrap { gap: 1rem; }
   .b-counter-value { font-size: clamp(3.2rem, 18vw, 5.5rem); }
   .b-cal-header { flex-direction: column; align-items: flex-start; }
