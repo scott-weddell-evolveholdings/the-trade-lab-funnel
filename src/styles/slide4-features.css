@@ -125,9 +125,18 @@
 
 /* ── Responsive ── */
 @media (max-width: 840px) {
-  .features-body { grid-template-columns: 1fr; gap: 1rem; }
+  /* Top-align + trim so heading, tabs, preview AND the CTA bar all fit — no
+     giant empty gap from vertical centering. Bottom padding clears the fixed
+     "Get This Template" bar. */
+  .slide--features {
+    justify-content: flex-start;
+    padding: 2.25rem clamp(1rem, 4vw, 2rem) 5.5rem;
+    gap: 1.1rem;
+  }
+  .features-headline { font-size: 1.5rem; }
+  .features-body { grid-template-columns: 1fr; gap: 0.9rem; }
   .features-tabs-vert {
-    flex-direction: row; flex-wrap: wrap;
+    flex-direction: row; flex-wrap: wrap; justify-content: center; gap: 2px;
     border-left: none;
     border-bottom: 2px solid rgba(255,255,255,0.08);
   }
@@ -135,12 +144,15 @@
     border-left: none;
     border-bottom: 3px solid transparent;
     margin-left: 0; margin-bottom: -2px;
-    padding: 0.55rem 0.8rem;
+    padding: 0.5rem 0.75rem;
   }
   .feat-tab.is-active {
     border-left-color: transparent;
     border-bottom-color: var(--blue-primary);
   }
   .feat-tab-desc { display: none; }
-  .feat-iframe-wrap { height: 320px; }
+  /* Taller preview fills the space; full-width iframe so the header CTA isn't
+     clipped by the desktop scrollbar-hiding offset. */
+  .feat-iframe-wrap { height: clamp(340px, 55vh, 520px); }
+  .feat-iframe-wrap iframe { width: 100%; }
 }

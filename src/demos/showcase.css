@@ -928,7 +928,13 @@ body {
 
 /* ══ RESPONSIVE ════════════════════════════════════════════ */
 @media (max-width: 820px) {
-  .d-nav-links { display: none; }
+  /* Collapse the template header so it fits the narrow preview: keep the logo
+     + the gold CTA, drop the links and phone (they overflow/clip otherwise).
+     (.as-nav on the hero tab is handled in slide1-hook.css.) */
+  .d-nav-links,
+  .d-nav-phone { display: none; }
+  .d-nav { padding: 0 4%; }
+  .d-nav-cta { padding: 8px 14px; }
   .d-two-col { grid-template-columns: 1fr; gap: 24px; }
   .d-cards-grid,
   .d-gallery-grid,
