@@ -15,7 +15,7 @@ notifies you.
 
 - **Pipeline:** Bathroom Funnel — `sVxnmxXTl4zSd8o50LER`
 - **Stage → Won:** `c2f50a38-fe66-4869-ad10-d81a9efd7922`
-- Checkout: `https://lc.thedigitalmarketers.io/preview/IUvmBg2k26QuP4yh0YOo`
+- Checkout: `https://go.thetradeslabs.com/checkout`
 
 ---
 
