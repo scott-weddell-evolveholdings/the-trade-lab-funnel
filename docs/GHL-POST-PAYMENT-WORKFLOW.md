@@ -66,7 +66,7 @@ The sooner you complete the onboarding form, the sooner your 7-day clock starts.
 Any questions, just reply to this email.
 
 — The Trades Lab
-hello@thetradeslabs.co.uk
+hello@thetradeslabs.com
 ```
 > Replace `{{onboarding_form_link}}` with your GHL onboarding form/survey URL.
 
