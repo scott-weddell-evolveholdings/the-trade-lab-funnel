@@ -53,7 +53,20 @@ just double-count.
    - Container name: the domain (e.g. `thetradeslabs.com`).
    - Target platform: **Web**.
 2. You'll get a container ID like `GTM-ABC1234`. Copy it.
-3. Set it as an env var and redeploy:
+
+   > **Web container vs. Server container.** If you later connect Meta's
+   > Conversions API through GTM (Events Manager → Connect Data Sources →
+   > choose the GTM server-side option), Meta auto-creates a **second**
+   > container labelled "Server" (e.g. `GTM-PD6CS9LX`) alongside your "Web"
+   > one. `VITE_GTM_ID` is **always the Web container** — the one bound to
+   > your actual domain. The Server container is a separate GTM **Server-Side**
+   > instance that needs its own hosting (Google Cloud) and its own URL; it
+   > never goes in this repo or in any env var here. It's an optional
+   > accuracy upgrade (better iOS/ad-blocker resilience via Conversions API),
+   > not required for GA4/Meta Pixel tracking to work — skip it until the
+   > browser-side setup below is confirmed working.
+
+3. Set the **Web** container ID as an env var and redeploy:
    - **Vercel** → Project → Settings → Environment Variables → `VITE_GTM_ID` = `GTM-ABC1234` → redeploy.
    - **Railway** → Project → Variables → same.
    - **Netlify** → Site settings → Environment variables → same.
