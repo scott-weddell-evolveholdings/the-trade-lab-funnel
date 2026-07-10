@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Trades Lab — Order Confirmed (design reference)</title>
+  <meta name="description" content="Standalone thank-you page design for the The Trades Lab funnel — replicate in GHL.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+<style>
+:root{
+  --navy:#0E1B2A; --navy-2:#16314A; --navy-3:#0B1622;
+  --gold:#C9A227; --gold-2:#E0BE55; --gold-soft:rgba(201,162,39,.28);
+  --cream:#F7F4EF; --paper:#FBFAF6; --white:#FFFFFF;
+  --ink:#0F172A; --slate:#334155; --slate-2:#5b6675;
+  --line:rgba(201,162,39,.22);
+  --on-navy:#EAF0F4; --on-navy-mute:#9DAAB6;
+  --grad:linear-gradient(135deg,#C9A227 0%,#E0BE55 100%);
+  --shadow-gold:0 14px 34px rgba(201,162,39,.30);
+  --disp:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
+  --body:'Inter',ui-sans-serif,system-ui,sans-serif;
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+.ty-root{
+  font-family:var(--body);
+  color:var(--on-navy);
+  background:
+    radial-gradient(ellipse 60% 45% at 12% 6%, rgba(224,190,85,.16) 0%, transparent 60%),
+    radial-gradient(ellipse 50% 40% at 90% 92%, rgba(201,162,39,.12) 0%, transparent 55%),
+    linear-gradient(160deg,var(--navy) 0%,#122236 55%,var(--navy) 100%);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  padding:clamp(1rem,3vw,2rem);
+  line-height:1.55;
+}
+.ty-wrap{max-width:740px;margin:0 auto}
+
+/* Top bar */
+.ty-top{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:.4rem .2rem 1.6rem;
+}
+.ty-brand{display:flex;align-items:center;gap:.6rem;font-family:var(--disp);font-weight:600;font-size:1.05rem;letter-spacing:-.01em;color:var(--cream)}
+.ty-brand svg{flex:0 0 auto}
+.ty-badge{display:flex;align-items:center;gap:.45rem;font-size:.66rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--on-navy-mute)}
+.ty-badge svg{color:var(--gold-2)}
+
+.ty-fade{opacity:0;transform:translateY(14px);animation:tyUp .7s var(--ease) forwards}
+.ty-fade.d2{animation-delay:.1s}
+.ty-fade.d3{animation-delay:.2s}
+.ty-fade.d4{animation-delay:.3s}
+
+/* ── Hero / success state ── */
+.ty-hero{text-align:center;padding:1.5rem 0 2.4rem}
+.ty-check{
+  width:64px;height:64px;margin:0 auto 1.6rem;border-radius:50%;
+  background:var(--grad);display:grid;place-items:center;
+  box-shadow:var(--shadow-gold);
+}
+.ty-check svg{color:var(--navy)}
+.ty-eyebrow{font-family:var(--disp);font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-2);margin-bottom:1rem}
+.ty-h1{font-family:var(--disp);font-weight:700;font-size:clamp(1.9rem,4.2vw,2.75rem);line-height:1.08;letter-spacing:-.03em;color:#fff;text-wrap:balance;margin-bottom:1rem}
+.ty-h1 em{font-style:normal;background:var(--grad);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ty-sub{font-size:1rem;color:var(--on-navy-mute);max-width:46ch;margin:0 auto}
+
+/* ── Order recap card ── */
+.ty-card{
+  background:var(--paper);color:var(--slate);
+  border-radius:18px;padding:clamp(1.4rem,2.5vw,1.9rem);
+  box-shadow:0 30px 70px rgba(0,0,0,.42),0 0 0 1px rgba(201,162,39,.14);
+  margin-bottom:1.6rem;
+}
+.ty-card-label{font-family:var(--disp);font-size:.68rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.ty-order{display:flex;gap:.9rem;align-items:flex-start;justify-content:space-between}
+.ty-order-name{font-family:var(--disp);font-weight:600;font-size:1.02rem;color:var(--ink);line-height:1.25}
+.ty-order-desc{font-size:.78rem;color:var(--slate-2);margin-top:.25rem;max-width:36ch}
+.ty-order-price{font-family:var(--disp);font-weight:600;font-size:1.02rem;color:var(--ink);font-variant-numeric:tabular-nums;white-space:nowrap}
+.ty-vat{font-size:.62em;font-weight:600;letter-spacing:.02em;color:var(--slate-2);vertical-align:.35em;margin-left:.15em}
+.ty-rule{height:1px;background:var(--line);margin:1.1rem 0}
+.ty-meta-row{display:flex;justify-content:space-between;font-size:.82rem;color:var(--slate-2)}
+.ty-meta-row + .ty-meta-row{margin-top:.4rem}
+.ty-receipt-note{display:flex;gap:.5rem;align-items:flex-start;margin-top:1.1rem;font-size:.8rem;color:var(--slate-2)}
+.ty-receipt-note svg{flex:0 0 auto;color:var(--gold);margin-top:.15rem}
+.ty-receipt-note strong{color:var(--ink);font-weight:600}
+
+/* ── Next steps ── */
+.ty-next-label{font-family:var(--disp);font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--on-navy-mute);margin-bottom:1rem;text-align:center}
+.ty-steps{display:flex;flex-direction:column;gap:.7rem;margin-bottom:2rem}
+.ty-step{
+  display:flex;gap:1rem;align-items:flex-start;
+  border:1px solid rgba(255,255,255,.08);border-radius:14px;
+  background:rgba(255,255,255,.03);padding:1.05rem 1.15rem;
+}
+.ty-step.is-action{border-color:var(--line);border-left:3px solid var(--gold);background:rgba(201,162,39,.07)}
+.ty-step-num{
+  flex:0 0 auto;width:28px;height:28px;border-radius:50%;
+  display:grid;place-items:center;font-family:var(--disp);font-weight:700;font-size:.82rem;
+  background:rgba(201,162,39,.16);color:var(--gold-2);
+}
+.ty-step.is-action .ty-step-num{background:var(--grad);color:var(--navy)}
+.ty-step-body strong{display:block;font-family:var(--disp);font-weight:600;font-size:.95rem;color:#fff;margin-bottom:.2rem}
+.ty-step-body span{font-size:.85rem;color:var(--on-navy-mute)}
+
+/* CTA */
+.ty-cta-wrap{text-align:center;margin-bottom:.5rem}
+.ty-cta{
+  display:inline-flex;align-items:center;justify-content:center;gap:.55rem;
+  border:0;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:1.02rem;
+  color:var(--navy);background:var(--grad);border-radius:999px;padding:1rem 1.8rem;
+  box-shadow:var(--shadow-gold);transition:transform .16s var(--ease),box-shadow .2s,filter .2s;letter-spacing:-.01em;
+  text-decoration:none;
+}
+.ty-cta:hover{transform:translateY(-2px);filter:brightness(1.05);box-shadow:0 18px 42px rgba(201,162,39,.42)}
+.ty-cta:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.ty-cta .arw{transition:transform .2s var(--ease)}
+.ty-cta:hover .arw{transform:translateX(4px)}
+.ty-cta-fine{text-align:center;font-size:.76rem;color:var(--on-navy-mute);margin:.8rem auto 2.2rem;max-width:38ch}
+
+/* Contact strip */
+.ty-help{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;flex-wrap:wrap;
+  text-align:center;font-size:.85rem;color:var(--on-navy-mute);margin-bottom:2.2rem;
+}
+.ty-help a{color:var(--gold-2);text-decoration:none;font-weight:600}
+.ty-help a:hover{text-decoration:underline}
+.ty-help .sep{color:rgba(255,255,255,.18)}
+
+/* Trust row */
+.ty-trust{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;margin-bottom:2rem;border:1px solid rgba(255,255,255,.08);border-radius:12px;overflow:hidden;background:rgba(255,255,255,.06)}
+.ty-trust div{background:var(--navy-3);padding:1.1rem 1.2rem;text-align:center}
+.ty-trust b{display:block;font-family:var(--disp);font-weight:600;font-size:.92rem;color:#fff;margin-bottom:.2rem}
+.ty-trust span{font-size:.72rem;color:var(--on-navy-mute)}
+
+.ty-foot{text-align:center;font-size:.7rem;color:var(--on-navy-mute);line-height:1.7}
+.ty-foot .ref{display:inline-block;margin-top:.4rem;font-size:.66rem;letter-spacing:.06em;text-transform:uppercase;color:rgba(201,162,39,.65)}
+
+@keyframes tyUp{to{opacity:1;transform:none}}
+@media (max-width:600px){
+  .ty-trust{grid-template-columns:1fr}
+  .ty-order{flex-direction:column;gap:.4rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .ty-fade{animation:none;opacity:1;transform:none}
+  .ty-cta,.ty-cta .arw{transition:none}
+}
+</style>
+
+<div class="ty-root">
+  <div class="ty-wrap">
+
+    <div class="ty-top">
+      <div class="ty-brand">
+        <svg width="20" height="26" viewBox="0 0 22 28" fill="none" aria-hidden="true">
+          <path d="M11 0C11 0 0 10.5 0 17.5C0 23.299 4.925 28 11 28C17.075 28 22 23.299 22 17.5C22 10.5 11 0 11 0Z" fill="#C9A227"/>
+          <path d="M11 7C11 7 4 13.5 4 17.5C4 21.09 7.134 24 11 24C14.866 24 18 21.09 18 17.5C18 13.5 11 7 11 7Z" fill="#F7F4EF" opacity=".45"/>
+        </svg>
+        The Trades Lab
+      </div>
+      <div class="ty-badge">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        Order Confirmed
+      </div>
+    </div>
+
+    <!-- Hero success state -->
+    <section class="ty-hero ty-fade">
+      <div class="ty-check">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      </div>
+      <p class="ty-eyebrow">Payment Received</p>
+      <h1 class="ty-h1">You're in, {{contact.first_name}} —<br><em>your build starts now.</em></h1>
+      <p class="ty-sub">Your Done-For-You Cinematic Website is officially in production. Here's exactly what happens next.</p>
+    </section>
+
+    <!-- Order recap -->
+    <section class="ty-card ty-fade d2" aria-label="Order confirmation">
+      <p class="ty-card-label">Order confirmation</p>
+
+      <div class="ty-order">
+        <div>
+          <div class="ty-order-name">Done-For-You Cinematic Website</div>
+          <div class="ty-order-desc">Custom cinematic site — designed, written &amp; launched for you.</div>
+        </div>
+        <div class="ty-order-price">£1,500<span class="ty-vat">+VAT</span></div>
+      </div>
+
+      <div class="ty-rule"></div>
+      <div class="ty-meta-row"><span>Status</span><span>Paid in full</span></div>
+
+      <div class="ty-receipt-note">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+        <span><strong>A receipt has been emailed</strong> to {{contact.email}}. Keep it for your records.</span>
+      </div>
+    </section>
+
+    <!-- What happens next -->
+    <p class="ty-next-label">What happens next</p>
+    <div class="ty-steps ty-fade d3">
+      <div class="ty-step is-action">
+        <span class="ty-step-num">1</span>
+        <div class="ty-step-body">
+          <strong>Complete your 2-minute onboarding form</strong>
+          <span>Business name, photos, service area, brand style — this is what your site is actually built from. Your 7-day clock starts once it's in.</span>
+        </div>
+      </div>
+      <div class="ty-step">
+        <span class="ty-step-num">2</span>
+        <div class="ty-step-body">
+          <strong>We design, write &amp; build your site</strong>
+          <span>Custom copy, cinematic before/after reveal, and local SEO — all handled for you.</span>
+        </div>
+      </div>
+      <div class="ty-step">
+        <span class="ty-step-num">3</span>
+        <div class="ty-step-body">
+          <strong>Live within 7 days — or your money back</strong>
+          <span>We'll be in touch throughout. No surprises, no disappearing act.</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="ty-cta-wrap ty-fade d4">
+      <a class="ty-cta" href="{{custom_values.onboarding_form_link}}">Complete Your Onboarding Form <span class="arw">→</span></a>
+    </div>
+    <p class="ty-cta-fine">Takes about 2 minutes. The sooner it's done, the sooner your 7-day build clock starts.</p>
+
+    <p class="ty-help">
+      Questions? <a href="mailto:hello@thetradeslabs.co.uk">hello@thetradeslabs.co.uk</a>
+      <span class="sep">·</span>
+      <a href="tel:{{custom_values.business_phone}}">{{custom_values.business_phone}}</a>
+    </p>
+
+    <div class="ty-trust">
+      <div><b>100% Money-Back</b><span>Pay nothing if we're late</span></div>
+      <div><b>No Contract</b><span>One payment, yours forever</span></div>
+      <div><b>Live in 7 Days</b><span>Fast delivery, guaranteed</span></div>
+    </div>
+
+    <p class="ty-foot">
+      © The Trades Lab · hello@thetradeslabs.co.uk
+      <br><span class="ref">Design reference — rebuild as the GHL Order Form's "Thank You" step, or a standalone funnel page linked from it</span>
+    </p>
+
+  </div>
+</div>
+
+</body>
+</html>
