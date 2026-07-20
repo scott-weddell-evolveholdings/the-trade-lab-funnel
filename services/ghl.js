@@ -13,7 +13,7 @@
  * REUSE FOR ANOTHER CLIENT: change nothing in this file. Every client-specific
  * value (API key, location, custom-field IDs, tags, pipeline/stage) comes from
  * environment variables. Give each client/sub-account its own .env and you're
- * done. See GHL-INTEGRATION.md.
+ * done. See docs/GHL-INTEGRATION.md.
  * ────────────────────────────────────────────────────────────────────────────
  */
 

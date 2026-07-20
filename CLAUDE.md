@@ -16,7 +16,7 @@ Two pages:
 
 The opt-in and quiz POST to our own backend routes (`/api/ghl/lead`, `/api/ghl/quiz`)
 — Netlify Functions that push the lead into **GoHighLevel** server-side (the API key
-never touches the browser). See `GHL-INTEGRATION.md`, `services/ghl.js`, `netlify/functions/`.
+never touches the browser). See `docs/GHL-INTEGRATION.md`, `services/ghl.js`, `netlify/functions/`.
 
 ## The business (why this exists)
 The Trades Lab sells **cinematic before/after "WOW" websites to UK trades** (plumbers,

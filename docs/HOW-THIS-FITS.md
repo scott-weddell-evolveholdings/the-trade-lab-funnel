@@ -61,7 +61,7 @@ colours/logo, wire the webhook, and build. The `reference/` folder holds the bra
   the 241-frame scroll sequence in `public/frames/` — host that folder on a CDN and
   point `src/demos/after-site.js` at it, or the hero animation won't play on GHL.
 - **Replace the demo:** the bundled scroll demo is the pool placeholder. Swap in our
-  niche demo (from the WOW skill → `extract_frames.sh`) so the pitch matches the niche.
+  niche demo (from the WOW skill → `scripts/extract_frames.sh`) so the pitch matches the niche.
 
 ## Next step
 Pick the niche (`../../06-SOPS/niche-selection.md`), then run the `AGENTS.md`

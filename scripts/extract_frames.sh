@@ -1,12 +1,13 @@
 #!/usr/bin/env bash
 # Extract frames from a source video for canvas scroll-scrub.
-# Usage: bash extract_frames.sh [video_file] [output_dir]
+# Usage: bash scripts/extract_frames.sh [video_file] [output_dir]
 
 set -euo pipefail
 
-SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-VIDEO="${1:-"${SCRIPT_DIR}/pool_cleaning_timelapse.mp4"}"
-OUT_DIR="${2:-"${SCRIPT_DIR}/frames"}"
+# This script lives in scripts/; resolve defaults against the project root.
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+VIDEO="${1:-"${ROOT_DIR}/pool_cleaning_timelapse.mp4"}"
+OUT_DIR="${2:-"${ROOT_DIR}/public/frames"}"
 FPS=24          # frames per second to extract — lower = fewer files, less smooth
 QUALITY=3       # ffmpeg -q:v: 1 (best) – 31 (worst). 2-4 is a good balance.
 
@@ -18,7 +19,7 @@ fi
 
 if [[ ! -f "$VIDEO" ]]; then
   echo "Error: video file '$VIDEO' not found."
-  echo "Usage: bash extract_frames.sh [video_file] [output_dir]"
+  echo "Usage: bash scripts/extract_frames.sh [video_file] [output_dir]"
   exit 1
 fi
 

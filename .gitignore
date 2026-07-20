@@ -13,3 +13,6 @@ dist_old/
 
 # Local reference copy of the original funnel (not part of this project)
 lead_gen_funnel/
+
+# Separate embedded project — not part of this funnel repo
+saas-launch-quiz-app/

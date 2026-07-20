@@ -12,12 +12,12 @@ scratch. Tick each box as you go. Every step says **where** it happens:
 > the canvas engine), stop — that's a sign something's off.
 
 **Deep-dive docs referenced below (already in this repo):**
-- `GHL-INTEGRATION.md` — CRM integration setup & reuse
+- `docs/GHL-INTEGRATION.md` — CRM integration setup & reuse
 - `docs/ANALYTICS-SETUP.md` — GTM / GA4 / Meta Pixel
 - `docs/GHL-WELCOME-SEQUENCE.md` — 7-email opt-in nurture (+ AI-builder prompt)
 - `docs/GHL-POST-PAYMENT-WORKFLOW.md` — payment → fulfilment automation
-- `docs/BRAND-GUIDELINES.md`, `docs/OFFER-AND-POSITIONING.md`, `FUNNEL-PLAN-AND-COPY.md`
-- `checkout-design.html`, `thank-you-design.html` — page designs to replicate in GHL
+- `docs/BRAND-GUIDELINES.md`, `docs/OFFER-AND-POSITIONING.md`, `docs/FUNNEL-PLAN-AND-COPY.md`
+- `docs/design-references/checkout-design.html`, `docs/design-references/thank-you-design.html` — page designs to replicate in GHL
 
 ---
 
@@ -120,7 +120,7 @@ in partials; swap content, don't rebuild.
 
 ## Milestone 3 — GHL CRM Setup  *(their M2, part 2)*
 
-Full detail in `GHL-INTEGRATION.md`. The frontend never holds the API key — it
+Full detail in `docs/GHL-INTEGRATION.md`. The frontend never holds the API key — it
 calls our own `/api/ghl/*` routes, which call GHL server-side.
 
 ### 3a. GHL account objects — 🔷 GHL
@@ -140,8 +140,8 @@ calls our own `/api/ghl/*` routes, which call GHL server-side.
 - [ ] ⚠️ Confirm `.env` is gitignored (never commit real credentials)
 
 ### 3c. Checkout & thank-you pages — 🔷 GHL
-- [ ] Build the **checkout page** in GHL, replicating `checkout-design.html` (branding, order summary, £1,500 +VAT, Stripe fields)
-- [ ] Build the **thank-you page** in GHL, replicating `thank-you-design.html` (order confirmed + "what happens next" → onboarding form)
+- [ ] Build the **checkout page** in GHL, replicating `docs/design-references/checkout-design.html` (branding, order summary, £1,500 +VAT, Stripe fields)
+- [ ] Build the **thank-you page** in GHL, replicating `docs/design-references/thank-you-design.html` (order confirmed + "what happens next" → onboarding form)
 - [ ] Set the checkout URL → `.env` `VITE_GHL_CHECKOUT_URL` (e.g. `https://go.client.com/checkout`)
 - [ ] Create the **onboarding form** (GHL Form/Survey — questions in `docs/GHL-POST-PAYMENT-WORKFLOW.md`)
 

@@ -127,7 +127,7 @@ This is the hero/hook overlay. Change:
 ### 3.5 — `src/demos/after-site.js`
 This file renders the canvas-driven demo site in the fake browser. Find and update `FRAME_COUNT` and the `DEMO_HTML` string.
 
-**`FRAME_COUNT`**: Only change this if the user provided a new scrub video and you ran `extract_frames.sh`. If using the placeholder pool video, keep `FRAME_COUNT` as-is and note it for the user.
+**`FRAME_COUNT`**: Only change this if the user provided a new scrub video and you ran `scripts/extract_frames.sh`. If using the placeholder pool video, keep `FRAME_COUNT` as-is and note it for the user.
 
 **`DEMO_HTML`**: This is a large template literal containing the full HTML of the fake demo site. Rewrite all Aqua Elite / pool-specific copy inside it to match the new niche. The structural tags (canvas, nav, hero sections, etc.) must stay intact. Change:
 - The `<title>` inside DEMO_HTML
@@ -267,7 +267,7 @@ The welcome flow is a post-opt-in quiz + offer page. Update the niche-specific c
 - The revenue question currently reads: `"Roughly how much does a typical pool cleaning client pay you per year?"` → replace `"pool cleaning client"` with the niche equivalent.
 - Scan the rest of `quiz.html` for any other niche-specific words and update them consistently.
 
-### 3.16 — `extract_frames.sh`
+### 3.16 — `scripts/extract_frames.sh`
 If the user provided a new scrub video filename (e.g. `lawn_care_timelapse.mp4`), update the default `VIDEO` variable on line 8:
 ```bash
 VIDEO="${1:-"${SCRIPT_DIR}/lawn_care_timelapse.mp4"}"
@@ -325,7 +325,7 @@ If `YOUR_GHL_WEBHOOK_URL` is still a placeholder in `src/slides/modal.js`, the f
 
 If the canvas hero animation does not play (shows a blank or static area), it means the `/frames/` directory is missing from the GHL host. The single HTML file does **not** embed the JPEG frame sequence — those must be hosted separately. Options:
 - Upload the `frames/` folder to a CDN (e.g. Cloudflare R2, AWS S3, or a plain web host), then update the frame path in `src/demos/after-site.js` from `/frames/` to the CDN URL before rebuilding.
-- Or generate new frames for the niche video: place the video in the project root and run `bash extract_frames.sh your_video.mp4`, then update `FRAME_COUNT` in `src/demos/after-site.js` to the printed count, rebuild, and host the frames.
+- Or generate new frames for the niche video: place the video in the project root and run `bash scripts/extract_frames.sh your_video.mp4`, then update `FRAME_COUNT` in `src/demos/after-site.js` to the printed count, rebuild, and host the frames.
 
 ### Final Checklist
 
