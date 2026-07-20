@@ -42,6 +42,16 @@ export default defineConfig(({ mode }) => {
                 filename: path.resolve(__dirname, 'welcome.html')
               }
             }
+          },
+          {
+            filename: 'onboarding.html',
+            template: 'onboarding.html',
+            injectOptions: {
+              data: analyticsData,
+              ejsOptions: {
+                filename: path.resolve(__dirname, 'onboarding.html')
+              }
+            }
           }
         ]
       })

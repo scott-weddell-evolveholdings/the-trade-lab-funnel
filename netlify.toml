@@ -13,3 +13,9 @@
   # Bundle the shared services/ module in with each function.
   node_bundler = "esbuild"
   included_files = ["services/**"]
+
+# Serve the onboarding page at the clean /onboarding URL (rewrite, keeps the URL).
+[[redirects]]
+  from = "/onboarding"
+  to = "/onboarding.html"
+  status = 200
