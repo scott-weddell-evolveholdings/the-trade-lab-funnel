@@ -92,16 +92,6 @@
 /* GHL embed target — the iframe fills this box. min-height keeps layout stable while it loads. */
 .ob-embed{position:relative;min-height:640px;border-radius:12px;overflow:hidden;background:var(--white)}
 .ob-embed iframe{width:100%;min-height:640px;border:0;display:block}
-/* Placeholder shown only when the calendar isn't wired up yet (design-reference state) */
-.ob-embed .ob-placeholder{
-  position:absolute;inset:0;display:grid;place-items:center;text-align:center;padding:2rem;
-  color:var(--slate-2);background:
-    repeating-linear-gradient(-45deg,rgba(201,162,39,.05) 0 12px,transparent 12px 24px),var(--paper);
-}
-.ob-placeholder .pin{width:44px;height:44px;margin:0 auto 1rem;border-radius:50%;display:grid;place-items:center;background:rgba(201,162,39,.14);color:var(--gold)}
-.ob-placeholder strong{display:block;font-family:var(--disp);font-weight:600;color:var(--ink);font-size:1rem;margin-bottom:.35rem}
-.ob-placeholder span{font-size:.82rem;max-width:30ch;display:inline-block}
-.ob-placeholder code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.76rem;color:var(--gold);background:rgba(201,162,39,.1);padding:.1rem .35rem;border-radius:5px}
 
 /* ── What happens on the call ── */
 .ob-next-label{font-family:var(--disp);font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--on-navy-mute);margin-bottom:1rem;text-align:center}
